@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QFileDialog, QComboBox, QMessageBox, QVBoxLayout, QWidget
 from PyQt5.QtGui import QPixmap, QColor, QPalette
 from PyQt5.QtCore import Qt
@@ -9,7 +10,7 @@ class ViperGUI(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("VIPER Runner")
+        self.setWindowTitle("VIPER Genome Assembler")
 
         # Acrylic layout
         self.setWindowOpacity(0.95)  # Adjust alpha value for transparency
@@ -129,13 +130,34 @@ class ViperGUI(QMainWindow):
             # Change the working directory to the selected folder
             os.chdir(folder)
             # Run the pipeline script with the specified number of samples and threads
-            command = f"{pipeline} {num_threads} {num_samples}"
-            print(f"Running command: {command}")
-            subprocess.run(command, check=True, shell=True)
+            log_file = f"{pipeline}_runLog.txt"
+            # Open the log file in write mode
+            with open(log_file, 'w') as log:
+                # Run the pipeline script with the specified number of samples and threads
+                command = f"{pipeline} {num_threads} {num_samples}"
+                print(f"Running command: {command}")
+                
+                # Execute the command and redirect stdout and stderr to the log file and console
+                process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, text=True)
+
+                # Read the output from the process and write it to both the log file and the console
+                while True:
+                    output = process.stdout.readline()
+                    if output == "" and process.poll() is not None:
+                        break
+                    if output:
+                        print(output.strip())  # Print to console
+                        log.write(output)      # Write to log file
+
+                # Read the stderr output
+                stderr_output = process.stderr.read()
+                if stderr_output:
+                    print(stderr_output.strip())  # Print to console
+                    log.write(stderr_output)      # Write to log file
 
             QMessageBox.information(self, "Executed", "VIPER executed!")
         except subprocess.CalledProcessError:
-            QMessageBox.critical(self, "Error", "An error occurred while trying to run VIPER.")
+            QMessageBox.critical(self, "Error", "An error occurred while trying to run VIPER. Please, check the screen log.")
 
     def update_databases(self):
         # Run the script to update virus databases
@@ -145,7 +167,7 @@ class ViperGUI(QMainWindow):
             subprocess.run([script_path], check=True, shell=True)
             QMessageBox.information(self, "Done", "Virus databases updated successfully!")
         except subprocess.CalledProcessError:
-            QMessageBox.critical(self, "Error", "An error occurred while updating virus databases.")
+            QMessageBox.critical(self, "Error", "An error occurred while updating virus databases. Please, check the screen log.")
 
     def on_pipeline_changed(self, index):
         selected_pipeline = self.pipeline_choice.itemText(index)

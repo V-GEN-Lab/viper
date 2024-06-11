@@ -1,0 +1,102 @@
+LOCUS       JN993010                1755 bp    cRNA    linear   VRL 24-AUG-2017
+DEFINITION  Influenza B virus (B/Wisconsin/01/2010) segment 4 hemagglutinin
+            (HA) gene, complete cds.
+ACCESSION   JN993010
+VERSION     JN993010.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Wisconsin/01/2010)
+  ORGANISM  Influenza B virus (B/Wisconsin/01/2010)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus; Betainfluenzavirus
+            influenzae.
+REFERENCE   1  (bases 1 to 1755)
+  AUTHORS   Garten,R.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (07-NOV-2011) WHO Collaborating Center for Surveillance,
+            Epidemiology and Control of Influenza, Influenza Division, Centers
+            for Disease Control and Prevention, 1600 Clifton Road, N.E.,
+            Atlanta, GA 30333, USA
+COMMENT     ##GISAID_EpiFlu(TM)Data-START##
+            Isolate                :: B/Wisconsin/01/2010
+            Subtype                :: H0N0
+            Segment_name           :: HA
+            Passage_history        :: E3
+            Antigen_character      :: B/FLORIDA/04/2006-LIKE
+            Adamantane_resistance  :: unknown
+            Zanamivir_resistance   :: unknown
+            Oseltamivir_resistance :: unknown
+            Peramivir_resistance   :: unknown
+            Other_resistance       :: unknown
+            Country                :: United States
+            State/Province         :: Wisconsin
+            Collection_day         :: 20
+            Collection_month       :: 02
+            Collection_year        :: 2010
+            Isolate_note           :: Originating Laboratory: Wisconsin State
+                                      Laboratory of Hygiene, Virology Unit
+                                      Stovall Bldg., Rm. 529 465 Henry Mall,
+                                      53706, Madison, United States
+            EPI_accession          :: EPI271545
+            Lineage                :: Yamagata
+            ##GISAID_EpiFlu(TM)Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1755
+                     /organism="Influenza B virus (B/Wisconsin/01/2010)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Wisconsin/01/2010"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:1089607"
+                     /segment="4"
+                     /country="USA"
+                     /collection_date="20-Feb-2010"
+                     /note="passage details: E3 (05/07/2010)"
+     gene            1..1755
+                     /gene="HA"
+     CDS             1..45
+                     /gene="SigPep"
+                     /protein_id="AET22022.1"
+     CDS             46..1083
+                     /gene="HA1"
+                     /codon_start=1
+                     /product="hemagglutinin"
+                     /protein_id="AET22022.1"
+     CDS             1084..1755
+                     /gene="HA2"
+                     /codon_start=1
+                     /product="hemagglutinin"
+                     /protein_id="AET22022.1"
+
+ORIGIN      
+        1 atgaaggcaa taattgtact actcatggta gtaacatcca atgcagatcg aatctgcact
+       61 gggataacat cttcaaactc acctcatgtg gtcaaaacag ctactcaagg ggaggtcaat
+      121 gtgactggcg tgataccact gacaacaaca ccaacaaaat cttattttgc aaatctcaaa
+      181 ggaacaagga ccagagggaa actatgcccg gactgtctca actgtacaga tctggatgtg
+      241 gccttgggca ggccaatgtg tgtggggacc acaccttctg ctaaagcttc aatactccac
+      301 gaggtcagac ctgttacatc cgggtgcttt cctataatgc acgacagaac aaaaatcagg
+      361 caactaccca atcttctcag aggatatgaa aatatcaggt tatcaaccca aaacgttatc
+      421 gatgcagaaa aagcaccagg aggaccctac agacttggaa cctcaggatc ttgccctaac
+      481 gctaccagta aaatcggatt ttttgcaaca atggcttggg ctgtcccaaa ggacaactac
+      541 aaaaatgcaa cgaacccact aacagtagaa gtaccataca tttgtacaga aggggaagac
+      601 caaattactg tttgggggtt ccattcagat aacaaaaccc aaatgaagag cctctatgga
+      661 gactcaaatc ctcaaaagtt cacctcatct gctaatggag taaccacaca ttatgtttct
+      721 cagattggcg acttcccaga tcaaacagaa gacggaggac taccacaaag cggcagaatt
+      781 gttgttgatt acatgatgca aaaacctggg aaaacaggaa caattgtcta tcaaagaggt
+      841 gttttgttgc ctcaaaaggt gtggtgcgcg agtggcagga gcaaagtaat aaaagggtca
+      901 ttgcctttaa ttggtgaagc agattgcctt catgaaaaat acggtggatt aaacaaaagc
+      961 aagccttact acacaggaga acatgcaaaa gccataggaa attgcccaat atgggtaaaa
+     1021 acacctttga agcttgccaa tggaaccaaa tatagacctc ctgcaaaact attgaaggaa
+     1081 aggggtttct tcggagctat tgctggtttc ctagaaggag gatgggaagg aatgattgca
+     1141 ggttggcacg gatacacatc tcacggagca catggagtgg cagtggcggc agaccttaag
+     1201 agtacacaag aagctataaa taagataaca aaaaatctca attctttgag tgagctagaa
+     1261 gtaaagaacc ttcaaagact aagtggtgcc atggatgaac tccacaacga aatactcgag
+     1321 ctggatgaga aagtggatga tctcagagct gacactataa gctcacaaat agaacttgca
+     1381 gtcttgcttt ccaacgaagg aataataaac agtgaagacg agcatctatt ggcacttgag
+     1441 agaaaactaa agaaaatgct gggtccctct gctgtagaca taggaaacgg atgcttcgaa
+     1501 accaaacaca aatgcaacca gacctgctta gacaggatag ctgctggcac ctttaatgca
+     1561 ggagaatttt ctctccccac ttttgattca ttgaacatta ctgctgcatc tttaaatgat
+     1621 gatggattgg ataaccatac tatactgctc tattactcaa ctgctgcttc tagtttggct
+     1681 gtaacattaa tgctagctat ttttattgtt tatatggtct ccagagacaa cgtttcatgc
+     1741 tccatctgtc tataa
+//
+

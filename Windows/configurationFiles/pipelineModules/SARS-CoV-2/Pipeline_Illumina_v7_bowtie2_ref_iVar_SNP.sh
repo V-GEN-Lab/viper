@@ -39,7 +39,7 @@ samtools index ${F}_Wuhan_mapped.sorted.bam
 
 ## 2a etapa:
 
-pilon --genome $PIPELINE/SARS-CoV-2/Reference_Genomes/Ref_Wuhan.fasta --frags ${F}_Wuhan_mapped.sorted.bam --minqual 20 --minmq 10 --output ${F}.Pilon --fix "gaps,indels"  --threads ${THREADS} --mindepth 10;
+pilon --genome $PIPELINE/SARS-CoV-2/Reference_Genomes/Ref_Wuhan.fasta --frags ${F}_Wuhan_mapped.sorted.bam --minqual 20 --output ${F}.Pilon --fix "gaps,indels" --mindepth 10;
 
 ## 3a etapa:
 

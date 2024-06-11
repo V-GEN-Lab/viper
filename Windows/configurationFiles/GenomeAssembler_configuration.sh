@@ -61,10 +61,14 @@ sudo -u viper bash -c "/home/viper/miniconda3/bin/conda config --set channel_pri
 echo "Creating Conda env 'VIPERGenomeAssembler'"
 sudo -u viper bash -c "/home/viper/miniconda3/bin/conda install -y -c conda-forge micromamba" 
 echo "Installing packages in Conda env 'VIPERGenomeAssembler' using micromamba"
-sudo -u viper bash -c "/home/viper/miniconda3/bin/micromamba create -y --prefix /home/viper/miniconda3/envs/VIPERGenomeAssembler python=3.8 fastqc trimmomatic fastp cutadapt spades bowtie2 samtools ivar pangolin minimap blast quast pilon nextclade seqtk sra-tools bandage iqtree xlrd openpyxl pyqt augur biopython==1.83"
+#sudo -u viper bash -c "/home/viper/miniconda3/bin/micromamba create -y --prefix /home/viper/miniconda3/envs/VIPERGenomeAssembler python=3.8 fastqc trimmomatic fastp cutadapt spades bowtie2 samtools ivar pangolin minimap blast quast pilon nextclade seqtk sra-tools bandage iqtree xlrd openpyxl pyqt augur biopython==1.83"
+sudo -u viper bash -c "/home/viper/miniconda3/bin/micromamba create -y -f VIPERGenomeAssembler.yml"
+
+echo "Creating Conda env 'VIPERPhylogeny'"
+sudo -u viper bash -c "/home/viper/miniconda3/bin/micromamba create -y -f VIPERPhylogeny.yml"
 
 # Exportando comando para ativar o ambiente GenomeAssembler por padrão para o usuário
-echo "conda activate VIPERGenomeAssembler" >> /home/viper/.bashrc 
+#echo "conda activate VIPERGenomeAssembler" >> /home/viper/.bashrc 
 
 # Exporta neofetch
 echo "neofetch" >> /home/viper/.bashrc
@@ -80,14 +84,30 @@ sudo -u viper bash -c "cp -r viperGUI /home/viper/"
 # Adiciona o diretório ao PATH
 PIPELINE_PATH=/home/viper/pipelineModules
 echo "export PATH=\$PATH:$PIPELINE_PATH" >> /home/viper/.bashrc
-# Define a variável PIPELINE
+# Define a variável PIPELINE e adiciona os scripts ao PATH
 echo "export PIPELINE=$PIPELINE_PATH" >> /home/viper/.bashrc
 ln -s $PIPELINE_PATH/SARS-CoV-2/Exec_COV_assembly_pipeline_Illumina_CeVIVAS.sh /usr/local/bin/VIPER_CoV.sh
 ln -s $PIPELINE_PATH/DENV/Exec_DENV_assembly_pipeline_Illumina.sh /usr/local/bin/VIPER_DENV.sh
 ln -s $PIPELINE_PATH/Influenza/Exec_FLU_assembly_pipeline_Illumina.sh /usr/local/bin/VIPER_Influenza.sh
 ln -s /home/viper/viperGUI/RunVIPER.bash /usr/local/bin/RunVIPER.bash
+ln -s /home/viper/viperGUI/RunVIPER_phylo.bash /usr/local/bin/RunVIPER_phylo.bash
+ln -s $PIPELINE_PATH/update_database/update_virusDB.sh /usr/local/bin/update_virusDB.sh
+ln -s $PIPELINE_PATH/update_database/updateMutationTables.sh /usr/local/bin/updateMutationTables.sh
+ln -s $PIPELINE_PATH/phylogeny/execPhylo.sh /usr/local/bin/execPhylo.sh
 
+# Realiza update dos bancos de dados virais
+#echo "Downloading most recent virus databases..."
+#sudo -u viper bash -c "$PIPELINE_PATH/update_database/update_virusDB.sh"
+# Update mutation tables
+#echo "Updating mutation tables..."
+#sudo -u viper bash -c "$PIPELINE_PATH/update_database/updateMutationTables.sh"
+
+#echo "Done!"
+echo "Clean conda cache"
+sudo -u viper bash -c "/home/viper/miniconda3/bin/conda clean -a -y"
 
 sudo -u viper bash -c "bash -l"
 
 echo "Configuration complete! You can now close this window!"
+
+#eval "$(micromamba shell hook --shell bash)"

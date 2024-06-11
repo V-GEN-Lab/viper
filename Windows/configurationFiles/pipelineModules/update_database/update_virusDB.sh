@@ -18,7 +18,7 @@ nextclade dataset get --name='flu_yam_ha' --output-dir="$PIPELINE/Influenza/next
 
 # Update DENV data
 echo "Updating Dengue Nextclade data"
-REPO="alex-ranieri/denvLineages"
+REPO="V-GEN-Lab/DyDEVILS"
 FOLDERS=("DENV1" "DENV2" "DENV3" "DENV4")
 DOWNLOAD_PATH="$PIPELINE/DENV/nextclade_files"
 

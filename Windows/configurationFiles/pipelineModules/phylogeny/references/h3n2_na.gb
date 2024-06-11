@@ -1,0 +1,78 @@
+LOCUS       CY114383                1436 bp    cRNA    linear   VRL 04-APR-2012
+DEFINITION  Influenza A virus (A/Wisconsin/67/2005(H3N2)) neuraminidase (NA)
+            gene, complete cds.
+ACCESSION   CY114383
+VERSION     CY114383.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Wisconsin/67/2005(H3N2))
+  ORGANISM  Influenza A virus (A/Wisconsin/67/2005(H3N2))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus; Alphainfluenzavirus
+            influenzae.
+REFERENCE   1  (bases 1 to 1436)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Westgeest,K.B.,
+            van Beek,R., Bestebroer,T.M., de Jong,J.C., Rimmelzwaan,G.F.,
+            Osterhaus,A.D.M.E., Fouchier,R.A.M., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1436)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-APR-2012) on behalf of JCVI/Erasmus Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..1436
+                     /organism="Influenza A virus (A/Wisconsin/67/2005(H3N2))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Wisconsin/67/2005"
+                     /serotype="H3N2"
+                     /host="Homo sapiens"
+                     /bio_material="CEIRS#CIP047WI6705#"
+                     /db_xref="taxon:393902"
+                     /segment="6"
+                     /lab_host="xMDCK2 passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2005"
+     gene            4..1413
+                     /gene="NA"
+     CDS             4..1413
+                     /gene="NA"
+                     /codon_start=1
+                     /product="neuraminidase"
+                     /protein_id="AFH00651.1"
+ORIGIN      
+        1 aagatgaatc caaatcaaaa gataataacg attggctctg tttctctcac catttccaca
+       61 atatgcttct tcatgcaaat tgccatcttg ataactactg taacattgca tttcaagcaa
+      121 tatgaattca actccccccc aaacaaccaa gtgatgctgt gtgaaccaac aataatagaa
+      181 agaaacataa cagagatagt gtatctgacc aacaccacca tagagaagga aatatgcccc
+      241 aaactagcag aatacagaaa ttggtcaaag ccgcaatgta acattacagg atttgcacct
+      301 ttttctaagg acaattcgat taggctttcc gctggtgggg acatctgggt gacaagagaa
+      361 ccttatgtgt catgcgatcc tgacaagtgt tatcaatttg cccttgggca gggaacaaca
+      421 ctaaacaacg tgcattcaaa tgacacagta catgatagga ccccttatcg gaccctattg
+      481 atgaatgagt taggtgttcc atttcatctg gggaccaagc aagtgtgcat agcatggtcc
+      541 agctcaagtt gtcacgatgg aaaagcatgg ctgcatgttt gtgtaacggg ggatgataaa
+      601 aatgcaactg ctagcttcat ttacaatggg aggcttgtag atagtattgt ttcatggtcc
+      661 aaagaaatcc tcaggaccca ggagtcagaa tgcgtttgta tcaatggaac ttgtacagta
+      721 gtaatgactg atgggagtgc ttcaggaaaa gctgatacta aaatactatt cattgaggag
+      781 gggaaaatcg ttcatactag cacattgtca ggaagtgctc agcatgtcga ggagtgctcc
+      841 tgctatcctc gatatcttgg tgtcagatgt gtctgcagag acaactggaa aggctccaat
+      901 aggcccatag tagatataaa cataaaggat tatagcattg tttccagtta tgtgtgctca
+      961 ggacttgttg gagacacacc cagaaaaaac gacagctcca gcagtagcca ttgcttggat
+     1021 cctaacaatg aagaaggtgg tcatggagtg aaaggctggg cctttgatga tggaaatgac
+     1081 gtgtggatgg gaagaacgat cagcgagaag ttacgctcag gatatgaaac cttcaaagtc
+     1141 attgaaggct ggtccaaccc taattccaaa ttgcagataa ataggcaagt catagttgac
+     1201 agaggtaata ggtccggtta ttctggtatt ttctctgttg aaggcaaaag ctgcatcaat
+     1261 cggtgctttt atgtggagtt gataagggga agaaaagagg aaactgaagt cttgtggacc
+     1321 tcaaacagta ttgttgtgtt ttgtggcacc tcaggtacat atggaacagg ctcatggcct
+     1381 gatggggcgg acatcaatct catgcctata taagctttcg caattttaga aaaaac
+//
+

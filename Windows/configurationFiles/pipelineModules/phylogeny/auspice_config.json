@@ -1,0 +1,43 @@
+{
+  "title": "Phylogenetic tree built using Augur pipeline within VIPER",
+  "maintainers": [
+    {"name": "Alex Ranieri", "url": "https://github.com/alex-ranieri"},
+    {"name": "James Siqueira", "url": "https://github.com/jamessiqueirap"}
+  ],
+  "build_url": "https://github.com/V-GEN-Lab/viper",
+  "geo_resolutions": [
+    "region",
+    "country",
+    "division",
+    "location"
+  ],
+  "display_defaults": {
+  "map_triplicate": true,
+    "color_by": "country"
+  },
+  "filters": [
+    "clade_or_lineage",
+    "region",
+    "country",
+    "division",
+    "location"
+  ],
+  "panels": [
+    "tree",
+    "map",
+    "entropy",
+    "frequencies"
+  ],
+  "extensions": {
+     "nextclade": {
+       "clade_node_attrs": [
+         {
+           "name": "clade_or_lineage",
+           "displayName": "Clade or lineage designation",
+           "description": ""
+         }
+       ]
+     }
+   }
+}
+
