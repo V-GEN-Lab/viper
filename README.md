@@ -59,16 +59,15 @@ VIPER harnesses the power of the Windows Subsystem for Linux (WSL) to deliver it
 * Not sure about your version? Simply type `winver` in the Windows search bar and press Enter to check.
 * Using an earlier version? No worries! [Refer to the official Microsoft manual for guidance.](https://learn.microsoft.com/en-us/windows/wsl/install-manual) 
 
-* Approximately 9.9 GB of free disk space.
+* Approximately 12.8 GB of free disk space.
 
 #### 2. Installing WSL 2
 
-It is recommended to intall WSL 2 through Microsoft Store. 
-1. **Launch the Microsoft Store**: Find it on your Start menu or taskbar.
-2. **Search for "WSL 2"**: Type it in the search bar and press Enter.
-3. **Look for the app with a blue penguin icon.**
-4. **Install with a click**: Click the "Get" or "Install" button.
-5. **Restart for a fresh start**: After the installation, reboot your computer to ensure everything is set up correctly.
+Instructions to install WSL 2 on Windows can be found in this [link](https://learn.microsoft.com/en-us/windows/wsl/install).
+Briefly:
+1. Open PowerShell or Windows Command Prompt in administrator mode by right-clicking and selecting "Run as administrator".
+2. Enter the `wsl --install` command.
+3. Restart your machine.
 
 #### 3. Installing VIPER
 
