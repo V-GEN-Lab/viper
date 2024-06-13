@@ -65,13 +65,44 @@ if [[ $VIRUS == "SARS-CoV-2" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/sars-cov-2_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/Ref_Wuhan.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/Ref_Wuhan.gb"
+    ROOT="MN908947"
     #TITLE='"Phylogenetic tree built using VIPER for SARS-CoV-2"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
-            ROOT="oldest"
-        else
-            ROOT="best"
+            # Read the header to find the column positions
+            IFS=$'\t' read -r -a headers < "${METADATA}"
+            for i in "${!headers[@]}"; do
+            if [ "${headers[$i]}" == "strain" ]; then
+                strain_pos=$i
+            elif [ "${headers[$i]}" == "date" ]; then
+                date_pos=$i
+            fi
+            done
+            # Prepare the new line with the values
+            num_columns=${#headers[@]}
+            new_line=()
+
+            for (( i=0; i<num_columns; i++ )); do
+            if [ $i -eq $strain_pos ]; then
+                new_line+=("MN908947")
+            elif [ $i -eq $date_pos ]; then
+                new_line+=("2019-12-31")
+            else
+                new_line+=("")
+            fi
+            done
+
+            # Join the new line with tabs
+            new_line_joined=$(IFS=$'\t'; echo "${new_line[*]}")
+
+            # Copy the input file to the output file
+            cp "${METADATA}" "${METADATA:0:-4}_formated.tsv"
+
+            # Append the new line to the output file
+            echo -e "$new_line_joined" >> "${METADATA:0:-4}_formated.tsv"
+            METADATA2="${METADATA:0:-4}_formated.tsv"
+            METADATA=$METADATA2
         fi
     fi
 elif [[ $VIRUS == "DENV-1" ]]; then
@@ -245,8 +276,8 @@ if [  "$METADATA" != "null" ]; then
 else
   echo "Refining undated tree..."
   echo "Executing command:"
-  echo "augur refine --tree ${OUTPUT}_tree/${OUTPUT}.treefile --output-tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --output-node-data ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json"
-  augur refine --tree ${OUTPUT}_tree/${OUTPUT}.treefile --output-tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --output-node-data ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json
+  echo "augur refine --tree ${OUTPUT}_tree/${OUTPUT}.treefile --root $ROOT --output-tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --output-node-data ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json"
+  augur refine --tree ${OUTPUT}_tree/${OUTPUT}.treefile --root $ROOT --output-tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --output-node-data ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json
 fi
 
 # Command 4: augur ancestral
