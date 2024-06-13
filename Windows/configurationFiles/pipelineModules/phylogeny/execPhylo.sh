@@ -133,104 +133,96 @@ elif [[ $VIRUS == "FLUA_H1" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/h1n1pdm09_ha_clades-long.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h1n1pdm09_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h1n1pdm09_ha.gb"
+    ROOT="best"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H1N1 - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
             ROOT="oldest"
-        else
-            ROOT="best"
         fi
     fi
 elif [[ $VIRUS == "FLUA_N1" ]]; then
     CLADES=""
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h1n1pdm09_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h1n1pdm09_na.gb"
+    ROOT="best"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H1N1 - Neuraminidase (segment 6)"'
     if [  "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
             ROOT="oldest"
-        else
-            ROOT="best"
         fi
     fi
 elif [[ $VIRUS == "FLUA_N2" ]]; then
     CLADES=""
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h3n2_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h3n2_na.gb"
+    ROOT="best"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H3N2 - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
             ROOT="oldest"
-        else
-            ROOT="best"
         fi
     fi
 elif [[ $VIRUS == "FLUA_H3" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/h3n2_ha_clades-long.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h3n2_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h3n2_ha.gb"
+    ROOT="best"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H3N2 - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
             ROOT="oldest"
-        else
-            ROOT="best"
         fi
     fi
 elif [[ $VIRUS == "FLUB_VIC_HA" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/vic_ha_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/vic_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/vic_ha.gb"
+    ROOT="best"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Victoria - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
             ROOT="oldest"
-        else
-            ROOT="best"
         fi
     fi
 elif [[ $VIRUS == "FLUB_VIC_NA" ]]; then
     CLADES=""
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/vic_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/vic_na.gb"
+    ROOT="best"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Victoria - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
             ROOT="oldest"
-        else
-            ROOT="best"
         fi
     fi
 elif [[ $VIRUS == "FLUB_YAM_HA" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/yam_ha_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/yam_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/yam_ha.gb"
+    ROOT="best"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Yamagata - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
             ROOT="oldest"
-        else
-            ROOT="best"
         fi
     fi
 elif [[ $VIRUS == "FLUB_YAM_NA" ]]; then
     CLADES=""
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/yam_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/yam_na.gb"
+    ROOT="best"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Yamagata - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
             ROOT="oldest"
-        else
-            ROOT="best"
         fi
     fi
 else
