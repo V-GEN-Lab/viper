@@ -308,7 +308,7 @@ elif [  "$METADATA" != "null" ] && [ -z "$CLADES" ]; then
   echo "Executing command:"
   echo "augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $METADATA --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS"
   augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $METADATA --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS --skip-validation
-elif [ -z "$METADATA" ] && [ -n "$CLADES" ]; then
+elif [ "$METADATA" == "null" ] && [ -n "$CLADES" ]; then
   echo "Exporting tree without metadata..."
   echo "Executing command:"
   echo "augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --auspice-config $CONFIG"
