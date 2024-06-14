@@ -103,6 +103,7 @@ if [[ $VIRUS == "SARS-CoV-2" ]]; then
             echo -e "$new_line_joined" >> "${METADATA:0:-4}_formated.tsv"
             METADATA2="${METADATA:0:-4}_formated.tsv"
             METADATA=$METADATA2
+            ROOT="oldest"
         fi
     fi
 elif [[ $VIRUS == "DENV-1" ]]; then
