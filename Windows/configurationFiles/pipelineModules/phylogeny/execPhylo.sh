@@ -6,6 +6,7 @@
 # Supervisors: Alex Ranieri Jerônimo Lima; Gabriela Ribeiro; Vinicius Cairus;
 # Funding Institutions: FAPESP; Instituto Butantan;
 # Date: 15-03-2024
+#
 
 # Description: This script performs phylogenetic analyses on viral genomic data, covering sequential steps for sequence alignment, tree construction, temporal data-based refinement, ancestral reconstruction, translation, and export for subsequent interactive visualization using the auspice.us program.
 
