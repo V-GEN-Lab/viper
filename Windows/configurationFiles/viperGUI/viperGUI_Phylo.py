@@ -224,8 +224,8 @@ class ViperGUI(QMainWindow):
         virus_aliases = {
             "Influenza A/H1N1 - HA": "FLUA_H1",
             "Influenza A/H1N1 - NA": "FLUA_N1",
-            "Influenza A/H3N2 - HA": "FLUB_H3",
-            "Influenza A/H3N2 - NA": "FLUB_N2",
+            "Influenza A/H3N2 - HA": "FLUA_H3",
+            "Influenza A/H3N2 - NA": "FLUA_N2",
             "Influenza B/Victoria - HA": "FLUB_VIC_HA",
             "Influenza B/Victoria - NA": "FLUB_VIC_NA",
             "Influenza B/Yamagata- HA": "FLUB_YAM_HA",

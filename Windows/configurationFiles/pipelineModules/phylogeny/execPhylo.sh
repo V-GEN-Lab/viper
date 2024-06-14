@@ -6,7 +6,6 @@
 # Supervisors: Alex Ranieri Jerônimo Lima; Gabriela Ribeiro; Vinicius Cairus;
 # Funding Institutions: FAPESP; Instituto Butantan;
 # Date: 15-03-2024
-#
 
 # Description: This script performs phylogenetic analyses on viral genomic data, covering sequential steps for sequence alignment, tree construction, temporal data-based refinement, ancestral reconstruction, translation, and export for subsequent interactive visualization using the auspice.us program.
 
@@ -135,23 +134,51 @@ elif [[ $VIRUS == "FLUA_H1" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/h1n1pdm09_ha_clades-long.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h1n1pdm09_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h1n1pdm09_ha.gb"
-    ROOT="best"
+    ROOT="CY121680.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H1N1 - Hemagglutinin (segment 4)"'
-    if [ "$METADATA" != "null" ]; then
-        # Check if $METADATA has the date column
-        if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
-            ROOT="oldest"
-        fi
-    fi
+
 elif [[ $VIRUS == "FLUA_N1" ]]; then
     CLADES=""
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h1n1pdm09_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h1n1pdm09_na.gb"
-    ROOT="best"
+    ROOT="CY121680.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H1N1 - Neuraminidase (segment 6)"'
-    if [  "$METADATA" != "null" ]; then
+    if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
+            # Read the header to find the column positions
+            IFS=$'\t' read -r -a headers < "${METADATA}"
+            for i in "${!headers[@]}"; do
+            if [ "${headers[$i]}" == "strain" ]; then
+                strain_pos=$i
+            elif [ "${headers[$i]}" == "date" ]; then
+                date_pos=$i
+            fi
+            done
+            # Prepare the new line with the values
+            num_columns=${#headers[@]}
+            new_line=()
+
+            for (( i=0; i<num_columns; i++ )); do
+            if [ $i -eq $strain_pos ]; then
+                new_line+=("CY121680.1")
+            elif [ $i -eq $date_pos ]; then
+                new_line+=("2009-12-31")
+            else
+                new_line+=("")
+            fi
+            done
+
+            # Join the new line with tabs
+            new_line_joined=$(IFS=$'\t'; echo "${new_line[*]}")
+
+            # Copy the input file to the output file
+            cp "${METADATA}" "${METADATA:0:-4}_formated.tsv"
+
+            # Append the new line to the output file
+            echo -e "$new_line_joined" >> "${METADATA:0:-4}_formated.tsv"
+            METADATA2="${METADATA:0:-4}_formated.tsv"
+            METADATA=$METADATA2
             ROOT="oldest"
         fi
     fi
