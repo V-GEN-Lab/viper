@@ -136,13 +136,6 @@ elif [[ $VIRUS == "FLUA_H1" ]]; then
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h1n1pdm09_ha.gb"
     ROOT="CY121680.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H1N1 - Hemagglutinin (segment 4)"'
-
-elif [[ $VIRUS == "FLUA_N1" ]]; then
-    CLADES=""
-    REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h1n1pdm09_na_reference.fasta"
-    REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h1n1pdm09_na.gb"
-    ROOT="CY121680.1"
-    #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H1N1 - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
@@ -182,15 +175,93 @@ elif [[ $VIRUS == "FLUA_N1" ]]; then
             ROOT="oldest"
         fi
     fi
+elif [[ $VIRUS == "FLUA_N1" ]]; then
+    CLADES=""
+    REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h1n1pdm09_na_reference.fasta"
+    REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h1n1pdm09_na.gb"
+    ROOT="CY121682.1"
+    #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H1N1 - Neuraminidase (segment 6)"'
+    if [ "$METADATA" != "null" ]; then
+        # Check if $METADATA has the date column
+        if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
+            # Read the header to find the column positions
+            IFS=$'\t' read -r -a headers < "${METADATA}"
+            for i in "${!headers[@]}"; do
+            if [ "${headers[$i]}" == "strain" ]; then
+                strain_pos=$i
+            elif [ "${headers[$i]}" == "date" ]; then
+                date_pos=$i
+            fi
+            done
+            # Prepare the new line with the values
+            num_columns=${#headers[@]}
+            new_line=()
+
+            for (( i=0; i<num_columns; i++ )); do
+            if [ $i -eq $strain_pos ]; then
+                new_line+=("CY121682.1")
+            elif [ $i -eq $date_pos ]; then
+                new_line+=("2009-12-31")
+            else
+                new_line+=("")
+            fi
+            done
+
+            # Join the new line with tabs
+            new_line_joined=$(IFS=$'\t'; echo "${new_line[*]}")
+
+            # Copy the input file to the output file
+            cp "${METADATA}" "${METADATA:0:-4}_formated.tsv"
+
+            # Append the new line to the output file
+            echo -e "$new_line_joined" >> "${METADATA:0:-4}_formated.tsv"
+            METADATA2="${METADATA:0:-4}_formated.tsv"
+            METADATA=$METADATA2
+            ROOT="oldest"
+        fi
+    fi
 elif [[ $VIRUS == "FLUA_N2" ]]; then
     CLADES=""
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h3n2_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h3n2_na.gb"
-    ROOT="best"
+    ROOT="CY114383"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H3N2 - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
+            # Read the header to find the column positions
+            IFS=$'\t' read -r -a headers < "${METADATA}"
+            for i in "${!headers[@]}"; do
+            if [ "${headers[$i]}" == "strain" ]; then
+                strain_pos=$i
+            elif [ "${headers[$i]}" == "date" ]; then
+                date_pos=$i
+            fi
+            done
+            # Prepare the new line with the values
+            num_columns=${#headers[@]}
+            new_line=()
+
+            for (( i=0; i<num_columns; i++ )); do
+            if [ $i -eq $strain_pos ]; then
+                new_line+=("CY114383")
+            elif [ $i -eq $date_pos ]; then
+                new_line+=("2005-12-31")
+            else
+                new_line+=("")
+            fi
+            done
+
+            # Join the new line with tabs
+            new_line_joined=$(IFS=$'\t'; echo "${new_line[*]}")
+
+            # Copy the input file to the output file
+            cp "${METADATA}" "${METADATA:0:-4}_formated.tsv"
+
+            # Append the new line to the output file
+            echo -e "$new_line_joined" >> "${METADATA:0:-4}_formated.tsv"
+            METADATA2="${METADATA:0:-4}_formated.tsv"
+            METADATA=$METADATA2
             ROOT="oldest"
         fi
     fi
@@ -198,11 +269,44 @@ elif [[ $VIRUS == "FLUA_H3" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/h3n2_ha_clades-long.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h3n2_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h3n2_ha.gb"
-    ROOT="best"
+    ROOT="CY163680.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H3N2 - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
+            # Read the header to find the column positions
+            IFS=$'\t' read -r -a headers < "${METADATA}"
+            for i in "${!headers[@]}"; do
+            if [ "${headers[$i]}" == "strain" ]; then
+                strain_pos=$i
+            elif [ "${headers[$i]}" == "date" ]; then
+                date_pos=$i
+            fi
+            done
+            # Prepare the new line with the values
+            num_columns=${#headers[@]}
+            new_line=()
+
+            for (( i=0; i<num_columns; i++ )); do
+            if [ $i -eq $strain_pos ]; then
+                new_line+=("CY163680.1")
+            elif [ $i -eq $date_pos ]; then
+                new_line+=("2005-12-31")
+            else
+                new_line+=("")
+            fi
+            done
+
+            # Join the new line with tabs
+            new_line_joined=$(IFS=$'\t'; echo "${new_line[*]}")
+
+            # Copy the input file to the output file
+            cp "${METADATA}" "${METADATA:0:-4}_formated.tsv"
+
+            # Append the new line to the output file
+            echo -e "$new_line_joined" >> "${METADATA:0:-4}_formated.tsv"
+            METADATA2="${METADATA:0:-4}_formated.tsv"
+            METADATA=$METADATA2
             ROOT="oldest"
         fi
     fi
@@ -210,11 +314,44 @@ elif [[ $VIRUS == "FLUB_VIC_HA" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/vic_ha_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/vic_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/vic_ha.gb"
-    ROOT="best"
+    ROOT="KX058884.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Victoria - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
+            # Read the header to find the column positions
+            IFS=$'\t' read -r -a headers < "${METADATA}"
+            for i in "${!headers[@]}"; do
+            if [ "${headers[$i]}" == "strain" ]; then
+                strain_pos=$i
+            elif [ "${headers[$i]}" == "date" ]; then
+                date_pos=$i
+            fi
+            done
+            # Prepare the new line with the values
+            num_columns=${#headers[@]}
+            new_line=()
+
+            for (( i=0; i<num_columns; i++ )); do
+            if [ $i -eq $strain_pos ]; then
+                new_line+=("KX058884.1")
+            elif [ $i -eq $date_pos ]; then
+                new_line+=("2008-12-31")
+            else
+                new_line+=("")
+            fi
+            done
+
+            # Join the new line with tabs
+            new_line_joined=$(IFS=$'\t'; echo "${new_line[*]}")
+
+            # Copy the input file to the output file
+            cp "${METADATA}" "${METADATA:0:-4}_formated.tsv"
+
+            # Append the new line to the output file
+            echo -e "$new_line_joined" >> "${METADATA:0:-4}_formated.tsv"
+            METADATA2="${METADATA:0:-4}_formated.tsv"
+            METADATA=$METADATA2
             ROOT="oldest"
         fi
     fi
@@ -222,11 +359,44 @@ elif [[ $VIRUS == "FLUB_VIC_NA" ]]; then
     CLADES=""
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/vic_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/vic_na.gb"
-    ROOT="best"
+    ROOT="CY018815.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Victoria - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
+            # Read the header to find the column positions
+            IFS=$'\t' read -r -a headers < "${METADATA}"
+            for i in "${!headers[@]}"; do
+            if [ "${headers[$i]}" == "strain" ]; then
+                strain_pos=$i
+            elif [ "${headers[$i]}" == "date" ]; then
+                date_pos=$i
+            fi
+            done
+            # Prepare the new line with the values
+            num_columns=${#headers[@]}
+            new_line=()
+
+            for (( i=0; i<num_columns; i++ )); do
+            if [ $i -eq $strain_pos ]; then
+                new_line+=("CY018815.1")
+            elif [ $i -eq $date_pos ]; then
+                new_line+=("1993-02-15")
+            else
+                new_line+=("")
+            fi
+            done
+
+            # Join the new line with tabs
+            new_line_joined=$(IFS=$'\t'; echo "${new_line[*]}")
+
+            # Copy the input file to the output file
+            cp "${METADATA}" "${METADATA:0:-4}_formated.tsv"
+
+            # Append the new line to the output file
+            echo -e "$new_line_joined" >> "${METADATA:0:-4}_formated.tsv"
+            METADATA2="${METADATA:0:-4}_formated.tsv"
+            METADATA=$METADATA2
             ROOT="oldest"
         fi
     fi
@@ -234,11 +404,44 @@ elif [[ $VIRUS == "FLUB_YAM_HA" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/yam_ha_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/yam_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/yam_ha.gb"
-    ROOT="best"
+    ROOT="JN993010.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Yamagata - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
+            # Read the header to find the column positions
+            IFS=$'\t' read -r -a headers < "${METADATA}"
+            for i in "${!headers[@]}"; do
+            if [ "${headers[$i]}" == "strain" ]; then
+                strain_pos=$i
+            elif [ "${headers[$i]}" == "date" ]; then
+                date_pos=$i
+            fi
+            done
+            # Prepare the new line with the values
+            num_columns=${#headers[@]}
+            new_line=()
+
+            for (( i=0; i<num_columns; i++ )); do
+            if [ $i -eq $strain_pos ]; then
+                new_line+=("JN993010.1")
+            elif [ $i -eq $date_pos ]; then
+                new_line+=("2010-02-20")
+            else
+                new_line+=("")
+            fi
+            done
+
+            # Join the new line with tabs
+            new_line_joined=$(IFS=$'\t'; echo "${new_line[*]}")
+
+            # Copy the input file to the output file
+            cp "${METADATA}" "${METADATA:0:-4}_formated.tsv"
+
+            # Append the new line to the output file
+            echo -e "$new_line_joined" >> "${METADATA:0:-4}_formated.tsv"
+            METADATA2="${METADATA:0:-4}_formated.tsv"
+            METADATA=$METADATA2
             ROOT="oldest"
         fi
     fi
@@ -246,11 +449,44 @@ elif [[ $VIRUS == "FLUB_YAM_NA" ]]; then
     CLADES=""
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/yam_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/yam_na.gb"
-    ROOT="best"
+    ROOT="CY019709.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Yamagata - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
         if awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i == "date") { found=1; break } } END { exit !found }' "${METADATA}"; then
+            # Read the header to find the column positions
+            IFS=$'\t' read -r -a headers < "${METADATA}"
+            for i in "${!headers[@]}"; do
+            if [ "${headers[$i]}" == "strain" ]; then
+                strain_pos=$i
+            elif [ "${headers[$i]}" == "date" ]; then
+                date_pos=$i
+            fi
+            done
+            # Prepare the new line with the values
+            num_columns=${#headers[@]}
+            new_line=()
+
+            for (( i=0; i<num_columns; i++ )); do
+            if [ $i -eq $strain_pos ]; then
+                new_line+=("CY019709.1")
+            elif [ $i -eq $date_pos ]; then
+                new_line+=("1994-05-10")
+            else
+                new_line+=("")
+            fi
+            done
+
+            # Join the new line with tabs
+            new_line_joined=$(IFS=$'\t'; echo "${new_line[*]}")
+
+            # Copy the input file to the output file
+            cp "${METADATA}" "${METADATA:0:-4}_formated.tsv"
+
+            # Append the new line to the output file
+            echo -e "$new_line_joined" >> "${METADATA:0:-4}_formated.tsv"
+            METADATA2="${METADATA:0:-4}_formated.tsv"
+            METADATA=$METADATA2
             ROOT="oldest"
         fi
     fi
@@ -268,7 +504,7 @@ echo "Sequence alignment in progress..."
 echo "Executing command:"
 echo "augur align --sequences $SEQUENCES --reference-sequence $REFERENCE_SEQUENCE --output ${OUTPUT}_alignment/${OUTPUT}_aligned.fasta --fill-gaps --nthreads $NTHREADS"
 augur align --sequences $SEQUENCES --reference-sequence $REFERENCE_SEQUENCE --output ${OUTPUT}_alignment/${OUTPUT}_aligned.fasta --fill-gaps --nthreads $NTHREADS
-
+#/home/viper/micromamba/envs/VIPERGenomeAssembler/bin/nextclade3
 echo "Tree construction using IQTree2..."
 
 # Create output folder
@@ -278,9 +514,13 @@ mkdir ${OUTPUT}_tree
 cp ${OUTPUT}_alignment/${OUTPUT}_aligned.fasta ${OUTPUT}_tree/
 
 # Command 2: IQtree2
+echo "Building tree..."
 echo "Executing command:"
 echo "iqtree2 -s ${OUTPUT}_tree/${OUTPUT}_aligned.fasta -m $MODEL -nt $NTHREADS -bb $UFBOOT"
 iqtree2 -s ${OUTPUT}_tree/${OUTPUT}_aligned.fasta -m $MODEL -nt $NTHREADS -bb $UFBOOT
+#echo "augur tree --alignment ${OUTPUT}_tree/${OUTPUT}_aligned.fasta --nthreads $NTHREADS --substitution-model $MODEL --tree-builder-args="\""-bb $UFBOOT"\"" --output ${OUTPUT}_tree/${OUTPUT}.treefile --override-default-args"
+
+#augur tree --alignment ${OUTPUT}_tree/${OUTPUT}_aligned.fasta --nthreads $NTHREADS --substitution-model $MODEL --tree-builder-args="-bb $UFBOOT" --output ${OUTPUT}_tree/${OUTPUT}.treefile --override-default-args
 
 # Remove duplicate alignment
 rm -rf ${OUTPUT}_tree/${OUTPUT}_aligned.fasta
@@ -317,8 +557,8 @@ augur translate --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --ancestral-sequ
 if [ -n "$CLADES" ]; then
   echo "Annotating clades/lineages..."
   echo "Executing command:"
-  echo "augur clades --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --mutations ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json --clade ${CLADES} --output-node-data ${OUTPUT}_tree/lineages.json --membership-name lineage --label-name lineages"
-  augur clades --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --mutations ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json --clade ${CLADES} --output-node-data ${OUTPUT}_tree/lineages.json --membership-name clade_or_lineage --label-name clade_or_lineage
+  echo "augur clades --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --mutations ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_nt_muts.json --clade ${CLADES} --output-node-data ${OUTPUT}_tree/lineages.json --membership-name clade_or_lineage --label-name clade_or_lineage"
+  augur clades --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --mutations ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_nt_muts.json --clade ${CLADES} --output-node-data ${OUTPUT}_tree/lineages.json --membership-name clade_or_lineage --label-name clade_or_lineage 
 fi
 
 # Extract metadata columns to color by
