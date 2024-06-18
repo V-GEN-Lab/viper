@@ -126,7 +126,7 @@ class ViperGUI(QMainWindow):
         layout.addWidget(button_run)
 
         # Update Mutation Tables Button
-        button_update_mutations = QPushButton("Update Mutation Tables", self)
+        button_update_mutations = QPushButton("Update Nextclade files", self)
         button_update_mutations.clicked.connect(self.update_mutation_tables)
         layout.addWidget(button_update_mutations)
 
@@ -205,16 +205,16 @@ class ViperGUI(QMainWindow):
             QMessageBox.critical(self, "Error", "Pipeline path environment variable (PIPELINE) not set.")
             return
 
-        script_path = os.path.join(pipeline_path, "update_database", "updateMutationTables.sh")
+        script_path = os.path.join(pipeline_path, "update_database", "update_virusDB.sh")
 
         try:
             # Run the updateMutationTables.sh script
-            command = f"sh {script_path}"
+            command = f"bash {script_path}"
             print(f"Running command: {command}")
             subprocess.run(command, check=True, shell=True)
-            QMessageBox.information(self, "Success", "Mutation tables updated successfully!")
+            QMessageBox.information(self, "Success", "Nextclade files updated successfully!")
         except subprocess.CalledProcessError:
-            QMessageBox.critical(self, "Error", "An error occurred while trying to update mutation tables. Please, check the screen log.")
+            QMessageBox.critical(self, "Error", "An error occurred while trying to update Nextclade files. Please, check the screen log.")
 
     def on_threads_changed(self, index):
         selected_threads = self.num_threads.itemText(index)

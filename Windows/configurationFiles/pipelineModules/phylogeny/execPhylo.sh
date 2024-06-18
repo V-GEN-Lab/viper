@@ -66,6 +66,7 @@ if [[ $VIRUS == "SARS-CoV-2" ]]; then
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/Ref_Wuhan.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/Ref_Wuhan.gb"
     ROOT="MN908947"
+    NEXTCLADE="$PIPELINE/SARS-CoV-2/nextstrain_files/"
     #TITLE='"Phylogenetic tree built using VIPER for SARS-CoV-2"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
@@ -110,30 +111,35 @@ elif [[ $VIRUS == "DENV-1" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/DENV1_augur_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/denv1.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/denv1.gb"
+    NEXTCLADE="$PIPELINE/DENV/nextclade_files/denv1"
     ROOT="mid_point"
     #TITLE='"Phylogenetic tree built using VIPER for DENV-1"'
 elif [[ $VIRUS == "DENV-2" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/DENV2_augur_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/denv2.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/denv2.gb"
+    NEXTCLADE="PIPELINE/DENV/nextclade_files/denv2"
     ROOT="mid_point"
     #TITLE='"Phylogenetic tree built using VIPER for DENV-2"'
 elif [[ $VIRUS == "DENV-3" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/DENV3_augur_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/denv3.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/denv3.gb"
+    NEXTCLADE="PIPELINE/DENV/nextclade_files/denv3"
     ROOT="mid_point"
     #TITLE='"Phylogenetic tree built using VIPER for DENV-3"'
 elif [[ $VIRUS == "DENV-4" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/DENV4_augur_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/denv4.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/denv4.gb"
+    NEXTCLADE="PIPELINE/DENV/nextclade_files/denv4"
     ROOT="mid_point"
     #TITLE='"Phylogenetic tree built using VIPER for DENV-4"'
 elif [[ $VIRUS == "FLUA_H1" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/h1n1pdm09_ha_clades-long.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h1n1pdm09_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h1n1pdm09_ha.gb"
+    NEXTCLADE="$PIPELINE/Influenza/nextclade_files/H1"
     ROOT="CY121680.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H1N1 - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
@@ -179,6 +185,7 @@ elif [[ $VIRUS == "FLUA_N1" ]]; then
     CLADES=""
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h1n1pdm09_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h1n1pdm09_na.gb"
+    NEXTCLADE="$PIPELINE/Influenza/nextclade_files/N1"
     ROOT="CY121682.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H1N1 - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
@@ -224,6 +231,7 @@ elif [[ $VIRUS == "FLUA_N2" ]]; then
     CLADES=""
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h3n2_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h3n2_na.gb"
+    NEXTCLADE="$PIPELINE/Influenza/nextclade_files/N2"
     ROOT="CY114383"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H3N2 - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
@@ -269,6 +277,7 @@ elif [[ $VIRUS == "FLUA_H3" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/h3n2_ha_clades-long.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/h3n2_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/h3n2_ha.gb"
+    NEXTCLADE="$PIPELINE/Influenza/nextclade_files/H3"
     ROOT="CY163680.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza A/H3N2 - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
@@ -314,6 +323,7 @@ elif [[ $VIRUS == "FLUB_VIC_HA" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/vic_ha_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/vic_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/vic_ha.gb"
+    NEXTCLADE="$PIPELINE/Influenza/nextclade_files/Vic"
     ROOT="KX058884.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Victoria - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
@@ -360,6 +370,7 @@ elif [[ $VIRUS == "FLUB_VIC_NA" ]]; then
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/vic_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/vic_na.gb"
     ROOT="CY018815.1"
+    NEXTCLADE="$PIPELINE/Influenza/nextclade_files/Vic_NA"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Victoria - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
@@ -404,6 +415,7 @@ elif [[ $VIRUS == "FLUB_YAM_HA" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/yam_ha_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/yam_ha_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/yam_ha.gb"
+    NEXTCLADE="$PIPELINE/Influenza/nextclade_files/Yam"
     ROOT="JN993010.1"
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Yamagata - Hemagglutinin (segment 4)"'
     if [ "$METADATA" != "null" ]; then
@@ -450,6 +462,7 @@ elif [[ $VIRUS == "FLUB_YAM_NA" ]]; then
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/yam_na_reference.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/yam_na.gb"
     ROOT="CY019709.1"
+    NEXTCLADE=""
     #TITLE='"Phylogenetic tree built using VIPER for Influenza B/Yamagata - Neuraminidase (segment 6)"'
     if [ "$METADATA" != "null" ]; then
         # Check if $METADATA has the date column
@@ -504,11 +517,15 @@ echo "Sequence alignment in progress..."
 echo "Executing command:"
 echo "augur align --sequences $SEQUENCES --reference-sequence $REFERENCE_SEQUENCE --output ${OUTPUT}_alignment/${OUTPUT}_aligned.fasta --fill-gaps --nthreads $NTHREADS"
 augur align --sequences $SEQUENCES --reference-sequence $REFERENCE_SEQUENCE --output ${OUTPUT}_alignment/${OUTPUT}_aligned.fasta --fill-gaps --nthreads $NTHREADS
-#/home/viper/micromamba/envs/VIPERGenomeAssembler/bin/nextclade3
-echo "Tree construction using IQTree2..."
 
 # Create output folder
 mkdir ${OUTPUT}_tree
+if [ $VIRUS != "FLUB_YAM_NA" ]; then
+    /home/viper/micromamba/envs/VIPERGenomeAssembler/bin/nextclade3 run -D $NEXTCLADE -t ${OUTPUT}_tree/nextclade_result.tsv ${OUTPUT}_alignment/${OUTPUT}_aligned.fasta
+    cut -d$'\t' -f2- ${OUTPUT}_tree/nextclade_result.tsv | sed 's/seqName/strain/g' > ${OUTPUT}_tree/nextclade_result_processed.tsv
+fi
+
+echo "Tree construction using IQTree2..."
 
 # Copy alignment to folder where the tree will be generated
 cp ${OUTPUT}_alignment/${OUTPUT}_aligned.fasta ${OUTPUT}_tree/
@@ -562,32 +579,44 @@ if [ -n "$CLADES" ]; then
 fi
 
 # Extract metadata columns to color by
-if [  "$METADATA" != "null" ]; then
-    COLOR_METADATA=$(awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i != "strain" && $i != "date") printf "%s ", $i; printf "\n"; exit}' $METADATA)
+if [  "$METADATA" != "null" ] && [ $VIRUS != "FLUB_YAM_NA" ]; then
+    awk -F'\t' '
+    BEGIN { FS=OFS="\t" }  # Set field separator and output separator as tab
+    FNR==NR { strain[$1] = $0; next }  # Read first file, store rows in strain array with strain as key
+    { print strain[$1] FS $0 }  # For each row in second file, print matching row from first and current row
+    ' $METADATA ${OUTPUT}_tree/nextclade_result_processed.tsv > ${OUTPUT}_tree/final_metadata.tsv
+    COLOR_METADATA=$(awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i != "strain" && $i != "date") printf "%s ", $i; printf "\n"; exit}' "${OUTPUT}_tree/final_metadata.tsv")
+    AUGUR_METADATA_EXPORT="${OUTPUT}_tree/final_metadata.tsv"
+elif [ $VIRUS == "FLUB_YAM_NA" ] && [  "$METADATA" != "null" ]; then
+    AUGUR_METADATA_EXPORT=$METADATA
+elif [ $VIRUS == "FLUB_YAM_NA" ] && [  "$METADATA" == "null" ]; then
+    AUGUR_METADATA_EXPORT=""
+elif [ $VIRUS != "FLUB_YAM_NA" ] && [  "$METADATA" == "null" ]; then
+    COLOR_METADATA=$(awk -F'\t' 'NR==1 {for (i=1; i<=NF; i++) if ($i != "strain" && $i != "date") printf "%s ", $i; printf "\n"; exit}' "${OUTPUT}_tree/nextclade_result_processed.tsv")
+    AUGUR_METADATA_EXPORT="${OUTPUT}_tree/nextclade_result_processed.tsv"
 fi
 
 # Command 7: augur export v2
 if [  "$METADATA" != "null" ] && [ -n "$CLADES" ]; then
   echo "Exporting tree with metadata..."
   echo "Executing command:"
-  echo "augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $METADATA --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS"
-  augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $METADATA --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS --skip-validation
-elif [  "$METADATA" != "null" ] && [ -z "$CLADES" ]; then
+  echo "augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $AUGUR_METADATA_EXPORT --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS"
+  augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $AUGUR_METADATA_EXPORT --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS --skip-validation
+elif [  "$METADATA" != "null" ] && [ -z "$CLADES" ] && [ $VIRUS != "FLUB_YAM_NA" ]; then
   echo "Exporting tree with metadata..."
   echo "Executing command:"
-  echo "augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $METADATA --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS"
-  augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $METADATA --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS --skip-validation
-elif [ "$METADATA" == "null" ] && [ -n "$CLADES" ]; then
+  echo "augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $AUGUR_METADATA_EXPORT --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS"
+  augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $AUGUR_METADATA_EXPORT --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS --skip-validation
+elif [  "$METADATA" != "null" ] && [ $VIRUS == "FLUB_YAM_NA" ]; then
+  echo "Exporting tree with metadata..."
+  echo "Executing command:"
+  echo "augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $AUGUR_METADATA_EXPORT --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS"
+  augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $AUGUR_METADATA_EXPORT --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS --skip-validation
+elif [  "$METADATA" == "null" ] && [ $VIRUS != "FLUB_YAM_NA" ]; then
   echo "Exporting tree without metadata..."
   echo "Executing command:"
-  echo "augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --auspice-config $CONFIG"
-  augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --auspice-config $CONFIG --skip-validation
-else
-  echo "Exporting tree without metadata..."
-  echo "Executing command:"
-  echo "augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --auspice-config $CONFIG"
-  augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --auspice-config $CONFIG --skip-validation
-  
+  echo "augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $AUGUR_METADATA_EXPORT --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS"  
+  augur export v2 --tree ${OUTPUT}_tree/${OUTPUT}_refinedTree.nwk --metadata $AUGUR_METADATA_EXPORT --node-data ${OUTPUT}_tree/${OUTPUT}_nt_muts.json ${OUTPUT}_tree/${OUTPUT}_aa_muts.json ${OUTPUT}_tree/${OUTPUT}_branch-lengths.json ${OUTPUT}_tree/lineages.json --output ${OUTPUT}_tree/${OUTPUT}.json --color-by-metadata ${COLOR_METADATA} --auspice-config $CONFIG --lat-longs $LAT_LONGS --skip-validation
 fi
 
 echo "Finish!!"
