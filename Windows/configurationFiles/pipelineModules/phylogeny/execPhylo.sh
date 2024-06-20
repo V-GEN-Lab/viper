@@ -118,21 +118,21 @@ elif [[ $VIRUS == "DENV-2" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/DENV2_augur_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/denv2.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/denv2.gb"
-    NEXTCLADE="PIPELINE/DENV/nextclade_files/denv2"
+    NEXTCLADE="$PIPELINE/DENV/nextclade_files/denv2"
     ROOT="mid_point"
     #TITLE='"Phylogenetic tree built using VIPER for DENV-2"'
 elif [[ $VIRUS == "DENV-3" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/DENV3_augur_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/denv3.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/denv3.gb"
-    NEXTCLADE="PIPELINE/DENV/nextclade_files/denv3"
+    NEXTCLADE="$PIPELINE/DENV/nextclade_files/denv3"
     ROOT="mid_point"
     #TITLE='"Phylogenetic tree built using VIPER for DENV-3"'
 elif [[ $VIRUS == "DENV-4" ]]; then
     CLADES="$PIPELINE/phylogeny/mutation_tables/DENV4_augur_clades.tsv"
     REFERENCE_SEQUENCE="$PIPELINE/phylogeny/references/denv4.fasta"
     REFERENCE_ANNOTATION="$PIPELINE/phylogeny/references/denv4.gb"
-    NEXTCLADE="PIPELINE/DENV/nextclade_files/denv4"
+    NEXTCLADE="$PIPELINE/DENV/nextclade_files/denv4"
     ROOT="mid_point"
     #TITLE='"Phylogenetic tree built using VIPER for DENV-4"'
 elif [[ $VIRUS == "FLUA_H1" ]]; then
