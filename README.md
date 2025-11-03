@@ -175,9 +175,9 @@ chmod +x configurePATH.sh
 ```
 4. Export the Executable sh scripts to your `/usr/local/bin/`:
 ```
-sudo ln -s $PIPELINE_PATH/SARS-CoV-2/Exec_COV_assembly_pipeline_Illumina_CeVIVAS.sh /usr/local/bin/VIPER_CoV.sh
-sudo ln -s $PIPELINE_PATH/DENV/Exec_DENV_assembly_pipeline_Illumina.sh /usr/local/bin/VIPER_DENV.sh
-sudo ln -s $PIPELINE_PATH/Influenza/Exec_FLU_assembly_pipeline_Illumina.sh /usr/local/bin/VIPER_Influenza.sh
+sudo ln -s $PIPELINE_PATH/SARS-CoV-2/Exec_assembly_pipeline_Illumina_v8_bowtie2_ref_iVar_CeVIVAS.sh /usr/local/bin/VIPER_CoV.sh
+sudo ln -s $PIPELINE_PATH/DENV/Exec_assembly_pipeline_Illumina_v5_bwa_mem_ref_iVar.sh /usr/local/bin/VIPER_DENV.sh
+sudo ln -s $PIPELINE_PATH/Influenza/Exec_assembly_pipeline_Illumina_v3_Vapor_SPAdes.sh /usr/local/bin/VIPER_Influenza.sh
 ```
 
 ## Usage
