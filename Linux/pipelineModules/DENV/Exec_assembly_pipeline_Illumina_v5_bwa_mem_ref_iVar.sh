@@ -12,9 +12,3 @@ conda activate $PIPELINE/DENV/denvAssembly; cat Lista.txt | xargs -P ${THREADS} 
 cat *.fasta > All_Fastas__${FOLDER}.fas
 cat *.Statistics | sort -ru > All_Statistics__${FOLDER}.tsv 
 
-# Process CeVIVAS output
-assemlby_path=$(realpath .)
-
-while read value; do read_path=$(realpath $value*R1*); echo -e $value '\t' $read_path; done < Lista.txt > read_path.tsv
-
-/usr/bin/python $PIPELINE/DENV/write_dengue_CeVIVAS_output5.py All_Statistics__${FOLDER}.tsv $assemlby_path read_path.tsv $FOLDER

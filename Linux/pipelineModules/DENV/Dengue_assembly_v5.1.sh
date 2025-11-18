@@ -83,7 +83,7 @@ selected_serotype=$(sort -k1 -rn stats_ReadsMapped.tsv | head -n1 | cut -f 2 | t
 ########################################
 # Etapa 5: Refinamento do genoma com Pilon
 ########################################
-java -jar /usr/local/src/pilon/1.24/pilon-1.24.jar --genome $PIPELINE/DENV/reference_genomes/dengue_${selected_serotype}.fasta --frags ${F}_dengue_${selected_serotype}_mapped.sorted.bam --output ${F}_${selected_serotype}.Pilon --fix "gaps,indels" --threads 1 --mindepth 5 --minqual 20 --minmq 10
+ pilon --genome $PIPELINE/DENV/reference_genomes/dengue_${selected_serotype}.fasta --frags ${F}_dengue_${selected_serotype}_mapped.sorted.bam --output ${F}_${selected_serotype}.Pilon --fix "gaps,indels" --threads 1 --mindepth 5 --minqual 20 --minmq 10
 
 ########################################
 # Etapa 6: Remapeamento contra o genoma corrigido
@@ -208,7 +208,7 @@ seqtk comp Genoma_${F}.fasta | awk '{x+=$9}END{print x}' > ${F}.Number_of_Ns
 ########################################
 # Etapa 12: Classificação filogenética
 ########################################
-nextclade run -D $PIPELINE/DENV/nextclade_files2/denv${selected_serotype}/2024-08-31--20-44-06Z/ -j 1 -t nextclade.tsv Genoma_${F}.fasta # Arquivo de saída
+nextclade run -D $PIPELINE/DENV/nextclade_files/denv${selected_serotype}/ -j 1 -t nextclade.tsv Genoma_${F}.fasta # Arquivo de saída
 
 # Extrai clado atribuído
 csvcut -t -c clade nextclade.tsv | tail -n+2 > ${F}.clade

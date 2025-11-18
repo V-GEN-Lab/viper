@@ -43,17 +43,11 @@ bowtie2 -p 5 -x $PIPELINE/SARS-CoV-2/Reference_Genomes/BA.2_ref -1 ${F}_R1_paire
 samtools sort ${F}_Wuhan_mapped.bam -o ${F}_Wuhan_mapped.sorted.bam
 samtools index ${F}_Wuhan_mapped.sorted.bam
 
-# Talvez adicionar Picard MarkDuplicates
-#ferramenta que identifica e marca (ou remove, se configurado) leituras duplicadas em arquivos SAM/BAM. Essas duplicatas normalmente surgem durante a amplificação por PCR na preparação da biblioteca de sequenciamento (ou devido a artefatos ópticos) e podem inflar artificialmente a cobertura, levando a vieses em análises subsequentes, como a chamada de variantes. Ao marcar essas leituras duplicadas (geralmente definindo uma flag específica no arquivo BAM), os programas de downstream podem ignorá-las, garantindo que apenas leituras independentes sejam consideradas nas análises.
-
-# java -jar picard.jar MarkDuplicates I=input.bam O=marked_duplicates.bam M=marked_dup_metrics.txt
 
 # Correção do genoma com Pilon
-java -jar /usr/local/src/pilon/1.24/pilon-1.24.jar --genome $PIPELINE/SARS-CoV-2/Reference_Genomes/BA.2_ref.fasta --frags ${F}_Wuhan_mapped.sorted.bam --minmq 30 --output ${F}.Pilon --fix "gaps,indels"  --threads 10 --mindepth 10;
+pilon --genome $PIPELINE/SARS-CoV-2/Reference_Genomes/BA.2_ref.fasta --frags ${F}_Wuhan_mapped.sorted.bam --minmq 30 --output ${F}.Pilon --fix "gaps,indels"  --threads 10 --mindepth 10;
 
 
-# Correção do genoma com Pilon usando a versão do Picard
-#java -jar /usr/local/src/pilon/1.24/pilon-1.24.jar --genome $PIPELINE/SARS-CoV-2/Reference_Genomes/BA.2_ref.fasta --frags marked_duplicates.bam --minmq 30 --output ${F}.Pilon --fix "gaps,indels" --threads 10 --mindepth 10;
 
 # 4. Remapeamento e Chamada de Variantes
 # Remapeamento com o genoma corrigido usando bowtie2 como mapeados e ara correção o ivar (mas pode ser usado LoFreq)
@@ -92,7 +86,7 @@ python $PIPELINE/SARS-CoV-2/substitute_degenarate_bases.py ${F}_ivar.fa Genoma_$
 # 5. Análise de Cobertura e Estatísticas
 
 # Diretório onde estão os arquivos BED
-BED_DIR="/storage/zuleika/volume1/project/carol/sarsCov2/CeVIVAS/pipeline"
+BED_DIR="$PIPELINE/SARS-CoV-2/"
 
 # Copiar os arquivos BED para o diretório de trabalho
 cp ${BED_DIR}/v3_check_*.bed ./
@@ -182,17 +176,7 @@ ls Genoma_${F}.fasta > ${F}.GenomeName;
 K=Genoma_${F}.fasta # New header
 sed -i "1s/^.*$/>${K}/" Genoma_${F}.fasta;
 
-# Processar variantes intrahost
-eval "$(conda shell.bash hook)"
-conda activate /storage/zuleika/volume1/project/carol/sarsCov2/conda_envs/alexranieri/intrahost
 
-cat Genoma_${F}.fasta | sed 's/__/_/g' | sed 's/.fasta//g' > Genoma_${F}_minor_check.fasta
-mHeader=$(grep '>' Genoma_${F}_minor_check.fasta | sed 's/>//g')
-mafft --keeplength --add Genoma_${F}_minor_check.fasta $PIPELINE/SARS-CoV-2/Reference_Genomes/BA.2_ref.fasta > ${F}_ref.algn
-bam-readcount -w 0 -f $PIPELINE/SARS-CoV-2/Reference_Genomes/BA.2_ref.fasta -q 30 ${F}_Wuhan_mapped.sorted.bam  > ${mHeader}.fa.bc
-python $PIPELINE/SARS-CoV-2/intrahost_script.py -in ${mHeader}.fa.bc -dp 100 -al ${F}_ref.algn
-
-conda deactivate
 
 if test -f ${F}_ref.algn.minor.fa; then
     mv ${F}_ref.algn.minor.fa Genoma_${F}_minor.fasta

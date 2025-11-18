@@ -30,4 +30,6 @@ echo "Configuring Conda env to user"
 echo "Creating Conda env 'VIPER'"
 /home/$usuario/miniconda3/bin/conda install -y -c conda-forge micromamba
 echo "Installing packages in 'VIPER' env using micromamba"
-/home/$usuario/miniconda3/bin/micromamba create -y -f VIPER.yml
+/home/$usuario/miniconda3/bin/micromamba create -y -f VIPER_V2.yml
+
+

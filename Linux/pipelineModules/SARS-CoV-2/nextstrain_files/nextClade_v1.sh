@@ -9,15 +9,15 @@ SORTED_FILE="${BASENAME}_sorted.tsv"
 # Sort All Stats file for latter
 sort -ru "${S}" > "${SORTED_FILE}"
 
-nextclade dataset get --name='sars-cov-2' --output-dir='/storage/zuleika/volume1/project/carol/sarsCov2/CeVIVAS/pipeline/nextstrain_files'
+nextclade dataset get --name='sars-cov-2' --output-dir='$PIPELINE/SARS-CoV-2/nextstrain_files'
 
 # Run NextClade 
 
 mkdir -p ${H}__nextClade # Create NextClade output folder
-nextclade run  --input-dataset /storage/zuleika/volume1/project/carol/sarsCov2/CeVIVAS/pipeline/nextstrain_files --output-all ${H}__nextClade --output-basename nextclade --jobs 4 ${F}
+nextclade run  --input-dataset $PIPELINE/SARS-CoV-2/nextstrain_files --output-all ${H}__nextClade --output-basename nextclade --jobs 4 ${F}
 
 # Join NextClade results with Sorted All Stats using python
-/usr/bin/python /storage/zuleika/volume1/project/carol/sarsCov2/CeVIVAS/pipeline/nextstrain_files/process_AllStats_NextClade.py ${S:0:-4}_sorted.tsv ${H}__nextClade/nextclade.tsv
+python $PIPELINE/SARS-CoV-2/nextstrain_files/process_AllStats_NextClade.py ${S:0:-4}_sorted.tsv ${H}__nextClade/nextclade.tsv
 
 # Cleaning intermediate files
 rm "${SORTED_FILE}"

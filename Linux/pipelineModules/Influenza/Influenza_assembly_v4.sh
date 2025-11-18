@@ -46,7 +46,7 @@ rm -rf ${F}_R1_unpaired.fq.gz ${F}_R2_unpaired.fq.gz
 #    "vapor.py" compara reads vs. um conjunto de referências
 # ========================================================================
 cat $PIPELINE/Influenza/segment_list.txt \
-| xargs -P 8 -I {} sh -c 'N=$(cat sample_name.txt); /project/carol/influenza/pipeline/software/vapor/vapor.py -fa $PIPELINE/Influenza/segments_database/{}.fasta -fq "$N"_R1_paired.fq.gz "$N"_R2_paired.fq.gz | cut -f 6 | sed "s/>//g" > {}_result.txt'
+| xargs -P 8 -I {} sh -c 'N=$(cat sample_name.txt); $PIPELINE/Influenza/vapor/vapor.py -fa $PIPELINE/Influenza/segments_database/{}.fasta -fq "$N"_R1_paired.fq.gz "$N"_R2_paired.fq.gz | cut -f 6 | sed "s/>//g" > {}_result.txt'
 
 # ========================================================================
 # 4) Determina o tipo (A ou B), o H (H1, H3, Victoria, Yamagata, etc) e o N

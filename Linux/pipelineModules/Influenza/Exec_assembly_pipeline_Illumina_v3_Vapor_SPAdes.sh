@@ -11,17 +11,9 @@ nextclade dataset get --name='flu_vic_ha' --output-dir='$PIPELINE/Influenza/next
 nextclade dataset get --name='flu_yam_ha' --output-dir='$PIPELINE/Influenza/nextclade_files/Yam'
 
 # Init assemblies in folder
-eval "$(conda shell.bash hook)"
-conda activate $PIPELINE/Influenza/fluAssembly; cat Lista.txt | xargs -P ${THREADS} -I {} sh -c "bash $PIPELINE/Influenza/Influenza_assembly_v4.sh {} ${FOLDER}"; conda deactivate
+cat Lista.txt | xargs -P ${THREADS} -I {} sh -c "bash $PIPELINE/Influenza/Influenza_assembly_v4.sh {} ${FOLDER}"
 
 # Join all fasta and statistics files
 #cat *.fasta > All_Fastas__${FOLDER}.fas
 cat *_complete.Statistics | sort -ru > All_Statistics__${FOLDER}.tsv
-
-# Process CeVIVAS output
-assemlby_path=$(realpath .)
-while read value; do read_path=$(realpath $value*R1*); echo -e $value '\t' $read_path; done < Lista.txt > read_path.tsv
-
-/usr/bin/python $PIPELINE/Influenza/write_flu_CeVIVAS_output_v4.py All_Statistics__${FOLDER}.tsv $assemlby_path read_path.tsv $FOLDER
-
 cat Genoma_FLU* > All_FLU_${FOLDER}.fasta
