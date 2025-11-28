@@ -16,38 +16,12 @@ nextclade dataset get --name='flu_h3n2_ha' --output-dir="$PIPELINE/Influenza/nex
 nextclade dataset get --name='flu_vic_ha' --output-dir="$PIPELINE/Influenza/nextclade_files/Vic"
 nextclade dataset get --name='flu_yam_ha' --output-dir="$PIPELINE/Influenza/nextclade_files/Yam"
 
-# Update DENV data
+# Updating Dengue Nextclade data
+
 echo "Updating Dengue Nextclade data"
-REPO="alex-ranieri/denvLineages"
-FOLDERS=("DENV1" "DENV2" "DENV3" "DENV4")
-DOWNLOAD_PATH="$PIPELINE/DENV/nextclade_files"
-
-# Function to check if a directory exists and delete it if it does
-delete_directory() {
-    if [ -d "$1" ]; then
-        echo "Deleting existing directory: $1"
-        rm -rf "$1"
-    fi
-}
-
-# Fetch the GitHub API response for each folder and download its contents
-for FOLDER in "${FOLDERS[@]}"; do
-    # Delete existing directory if it exists
-    delete_directory "$DOWNLOAD_PATH/denv${FOLDER: -1}"
-
-    # Create directory for the current folder
-    mkdir -p "$DOWNLOAD_PATH/denv${FOLDER: -1}"
-
-    # Fetch the GitHub API response for the folder
-    API_URL="https://api.github.com/repos/$REPO/contents/Nextclade_V3_data/$FOLDER"
-    FILES=$(curl -s "$API_URL" | grep -Eo '"download_url": "[^"]+"' | cut -d '"' -f 4)
-
-    # Loop through each file and download it
-    for FILE in $FILES; do
-        FILENAME=$(basename "$FILE")
-        echo "Downloading $FILENAME into $DOWNLOAD_PATH/denv${FOLDER: -1}..."
-        curl -s -o "$DOWNLOAD_PATH/denv${FOLDER: -1}/$FILENAME" -J -L "$FILE"
-    done
-done
+nextclade dataset get --name='community/v-gen-lab/dengue/denv1' --output-dir="$PIPELINE/DENV/nextclade_files/denv1"
+nextclade dataset get --name='community/v-gen-lab/dengue/denv2' --output-dir="$PIPELINE/DENV/nextclade_files/denv2"
+nextclade dataset get --name='community/v-gen-lab/dengue/denv3' --output-dir="$PIPELINE/DENV/nextclade_files/denv3"
+nextclade dataset get --name='community/v-gen-lab/dengue/denv4' --output-dir="$PIPELINE/DENV/nextclade_files/denv4"
 
 echo "Done"

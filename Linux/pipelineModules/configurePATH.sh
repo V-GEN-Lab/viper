@@ -7,6 +7,9 @@ PIPELINE_PATH=$(realpath .)
 echo "export PATH=\$PATH:$PIPELINE_PATH" >> ~/.bashrc
 echo "export PIPELINE=$PIPELINE_PATH" >> ~/.bashrc
 
+# Tornar o script de atualização de database executavel
+chmod +x update_database/update_virusDB.sh
+
 # Carrega as alterações no shell atual
 source ~/.bashrc
 

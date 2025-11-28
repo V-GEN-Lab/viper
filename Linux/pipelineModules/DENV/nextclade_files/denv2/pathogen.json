@@ -1,21 +1,30 @@
 {
-  "alignmentParams": {
-    "retry_reverse_complement": true
-  },
+  "$schema": "https://raw.githubusercontent.com/nextstrain/nextclade/refs/heads/release/packages/nextclade-schemas/input-pathogen-json.schema.json",
   "attributes": {
-    "name": "denv-2",
-    "refAccession": "NC_001474",
-    "refName": "NC_001474"
+    "name": "DENV-2",
+    "reference accession": "NC_001474.2",
+    "reference name": "Thailand/CDC-16681/1964"
   },
   "compatibility": {
     "cli": "3.0.0-alpha.0",
     "web": "3.0.0-alpha.0"
   },
+  "placementMaskRanges": [
+    {
+      "begin": 0,
+      "end": 94
+    },
+    {
+      "begin": 10271,
+      "end": 10735
+    }
+  ],
   "deprecated": false,
   "enabled": true,
   "experimental": true,
   "files": {
     "changelog": "CHANGELOG.md",
+    "examples": "sequences.fasta",
     "genomeAnnotation": "genome_annotation.gff3",
     "pathogenJson": "pathogen.json",
     "readme": "README.md",
@@ -23,8 +32,8 @@
     "treeJson": "tree.json"
   },
   "meta": {
-    "bugs": "https://github.com/nextstrain/nextclade_data/issues",
-    "source code": "https://github.com/nextstrain/nextclade_data"
+    "bugs": "https://github.com/V-GEN-Lab/dengue-lineages-nextclade/issues",
+    "source code": "https://github.com/V-GEN-Lab/dengue-lineages-nextclade"
   },
   "qc": {
     "frameShifts": {
@@ -32,21 +41,24 @@
     },
     "missingData": {
       "enabled": true,
-      "missingDataThreshold": 1605,
-      "scoreBias": 200
+      "missingDataThreshold": 1000,
+      "scoreBias": 100
     },
     "mixedSites": {
-      "enabled": true,
-      "mixedSitesThreshold": 6
+      "enabled": false,
+      "mixedSitesThreshold": 8
     },
     "privateMutations": {
-      "cutoff": 18,
+      "cutoff": 216,
       "enabled": true,
-      "typical": 5
+      "typical": 72,
+      "weightLabeledSubstitutions": 2,
+      "weightReversionSubstitutions": 1,
+      "weightUnlabeledSubstitutions": 1
     },
     "snpClusters": {
-      "clusterCutOff": 6,
-      "enabled": true,
+      "clusterCutOff": 5,
+      "enabled": false,
       "scoreWeight": 50,
       "windowSize": 100
     },
@@ -56,6 +68,12 @@
   },
   "schemaVersion": "3.0.0",
   "version": {
-    "tag": "unreleased"
-  }
+    "updatedAt": "2025-09-09T12:13:13Z",
+    "tag": "2025-09-09--12-13-13Z",
+    "compatibility": {
+      "cli": "3.0.0-alpha.0",
+      "web": "3.0.0-alpha.0"
+    }
+  },
+  "defaultCds": "E"
 }

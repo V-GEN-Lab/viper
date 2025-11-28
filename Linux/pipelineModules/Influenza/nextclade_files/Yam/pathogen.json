@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/nextstrain/nextclade/refs/heads/release/packages/nextclade-schemas/input-pathogen-json.schema.json",
   "schemaVersion": "3.0.0",
   "alignmentParams": {
     "excessBandwidth": 9,
@@ -119,7 +120,11 @@
     "nextstrain/flu/yam/ha/wisconsin-1-2010"
   ],
   "version": {
-    "updatedAt": "2024-01-30T16:34:55Z",
-    "tag": "2024-01-30--16-34-55Z"
+    "updatedAt": "2025-09-09T12:13:13Z",
+    "tag": "2025-09-09--12-13-13Z",
+    "compatibility": {
+      "cli": "3.0.0-alpha.0",
+      "web": "3.0.0-alpha.0"
+    }
   }
 }
