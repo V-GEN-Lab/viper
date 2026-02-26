@@ -1,0 +1,163 @@
+- STAGE: Before start
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: before_start
+- STAGE: Assembling
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: as_start
+- STAGE: K21
+  args:
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K21/configs/config.info
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K21/configs/careful_mode.info
+  config_dir: K21
+  del_after: []
+  output_files: []
+  path: /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin/spades-core
+  short_name: k21
+- STAGE: K33
+  args:
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K33/configs/config.info
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K33/configs/careful_mode.info
+  config_dir: K33
+  del_after: []
+  output_files: []
+  path: /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin/spades-core
+  short_name: k33
+- STAGE: K55
+  args:
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K55/configs/config.info
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K55/configs/careful_mode.info
+  config_dir: K55
+  del_after: []
+  output_files: []
+  path: /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin/spades-core
+  short_name: k55
+- STAGE: K77
+  args:
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/configs/config.info
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/configs/careful_mode.info
+  config_dir: K77
+  del_after: []
+  output_files: []
+  path: /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin/spades-core
+  short_name: k77
+- STAGE: Copy files
+  args:
+  - /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/share/spades/spades_pipeline/scripts/copy_files.py
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/before_rr.fasta
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/before_rr.fasta
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/assembly_graph_after_simplification.gfa
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/assembly_graph_after_simplification.gfa
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/final_contigs.fasta
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/contigs.fasta
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/first_pe_contigs.fasta
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/first_pe_contigs.fasta
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/strain_graph.gfa
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/strain_graph.gfa
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/scaffolds.fasta
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/scaffolds.fasta
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/scaffolds.paths
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/scaffolds.paths
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/assembly_graph_with_scaffolds.gfa
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/assembly_graph_with_scaffolds.gfa
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/assembly_graph.fastg
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/assembly_graph.fastg
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/K77/final_contigs.paths
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/contigs.paths
+  config_dir: ''
+  del_after:
+  - .bin_reads
+  - tmp/spades_0bq47kq7
+  output_files: []
+  path: /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin/python
+  short_name: copy_files
+- STAGE: Assembling
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: as_finish
+- STAGE: Mismatch correction
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: mc_start
+- STAGE: Mismatch correction contigs
+  args:
+  - /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/share/spades/spades_pipeline/scripts/correction_iteration_script.py
+  - --corrected
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/contigs.fasta
+  - --assembled
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/misc/assembled_contigs.fasta
+  - --assembly_type
+  - contigs
+  - --output_dir
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5
+  - --bin_home
+  - /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin
+  config_dir: mismatch_corrector/contigs
+  del_after:
+  - mismatch_corrector/contigs/tmp
+  - tmp/corrector_t_z1xrlo
+  output_files: []
+  path: /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin/python
+  short_name: mc_contigs
+- STAGE: Mismatch correction scaffolds
+  args:
+  - /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/share/spades/spades_pipeline/scripts/correction_iteration_script.py
+  - --corrected
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/scaffolds.fasta
+  - --assembled
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/misc/assembled_scaffolds.fasta
+  - --assembly_type
+  - scaffolds
+  - --output_dir
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5
+  - --bin_home
+  - /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin
+  config_dir: mismatch_corrector/scaffolds
+  del_after:
+  - mismatch_corrector/scaffolds/tmp
+  - tmp/corrector_ubnrts8f
+  output_files: []
+  path: /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin/python
+  short_name: mc_scaffolds
+- STAGE: Mismatch correction
+  args: []
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: 'true'
+  short_name: mc_finish
+- STAGE: Breaking scaffolds
+  args:
+  - /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/share/spades/spades_pipeline/scripts/breaking_scaffolds_script.py
+  - --result_scaffolds_filename
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/scaffolds.fasta
+  - --misc_dir
+  - /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment5/misc
+  - --threshold_for_breaking_scaffolds
+  - '3'
+  config_dir: ''
+  del_after: []
+  output_files: []
+  path: /home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin/python
+  short_name: bs
+- STAGE: Terminate
+  args: []
+  config_dir: ''
+  del_after:
+  - configs
+  output_files: []
+  path: 'true'
+  short_name: terminate

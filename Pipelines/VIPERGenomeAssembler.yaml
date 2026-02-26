@@ -1,0 +1,5 @@
+name: VIPERGenomeAssembler
+channels:
+dependencies:
+
+prefix: "/home/viper/.micromamba/envs/VIPERGenomeAssembler"

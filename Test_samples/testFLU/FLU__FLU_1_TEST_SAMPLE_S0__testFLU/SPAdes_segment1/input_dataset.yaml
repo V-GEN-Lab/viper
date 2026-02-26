@@ -1,0 +1,7 @@
+- "left reads":
+  - "/opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/segment_1_R1.fq.gz"
+  "number": !!int "1"
+  "orientation": "fr"
+  "right reads":
+  - "/opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/segment_1_R2.fq.gz"
+  "type": "paired-end"

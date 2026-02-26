@@ -1,0 +1,2 @@
+Genome	N_Reads	Reads_mapped	Percent_mapped	Mean_depth	Median_depth	Npos_Depth>=10	Npos_Depth>=25	Coverage	E_Coverage	E_Depth	NS1_Coverage	NS1_Depth	NS3_Coverage	NS3_Depth	NS5_Coverage	NS5_Depth	Number_of_Ns	SNPs	Serotype	clade
+Genoma_DENV__DENV_1_TEST_SAMPLE_S0__testDENV.fasta	861994	76670	8.89	630.687	35	9293	6888	92.2400	97.4300	37.9232	95.7300	17.7801	93.3700	1091.81	98.9900	46.3743	832	0	1	1V_F

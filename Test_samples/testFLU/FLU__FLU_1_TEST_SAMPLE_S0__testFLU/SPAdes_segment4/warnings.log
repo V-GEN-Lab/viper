@@ -1,0 +1,4 @@
+
+=== Error correction and assembling warnings:
+ * 0:00:01.700     2M / 160M  WARN    General                 (launcher.cpp              : 178)   Your data seems to have high uniform coverage depth. It is strongly recommended to use --isolate option.
+======= Warnings saved to /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment4/warnings.log
