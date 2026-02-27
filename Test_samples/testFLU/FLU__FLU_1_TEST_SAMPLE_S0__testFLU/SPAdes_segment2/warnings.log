@@ -1,9 +1,0 @@
-
-=== Error correction and assembling warnings:
- * 0:00:02.507     2M / 122M  WARN    General                 (kmer_coverage_model.cpp   : 327)   Valley value was estimated improperly, reset to 5
- * 0:00:02.508     2M / 122M  WARN    General                 (kmer_coverage_model.cpp   : 366)   Failed to determine erroneous kmer threshold. Threshold set to: 5
- * 0:00:00.465     2M / 97M   WARN    General                 (kmer_coverage_model.cpp   : 218)   Too many erroneous kmers, the estimates might be unreliable
- * 0:00:02.941     2M / 97M   WARN    General                 (kmer_coverage_model.cpp   : 366)   Failed to determine erroneous kmer threshold. Threshold set to: 20
- * 0:00:04.683     2M / 104M  WARN    General                 (kmer_coverage_model.cpp   : 366)   Failed to determine erroneous kmer threshold. Threshold set to: 24
- * 0:00:06.273     8M / 193M  WARN    General                 (launcher.cpp              : 178)   Your data seems to have high uniform coverage depth. It is strongly recommended to use --isolate option.
-======= Warnings saved to /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment2/warnings.log

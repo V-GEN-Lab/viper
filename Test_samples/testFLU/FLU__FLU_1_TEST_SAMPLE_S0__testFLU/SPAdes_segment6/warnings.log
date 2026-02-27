@@ -1,5 +1,0 @@
-
-=== Error correction and assembling warnings:
- * 0:00:00.296     1M / 42M   WARN    General                 (kmer_coverage_model.cpp   : 218)   Too many erroneous kmers, the estimates might be unreliable
- * 0:00:01.747     4M / 163M  WARN    General                 (launcher.cpp              : 178)   Your data seems to have high uniform coverage depth. It is strongly recommended to use --isolate option.
-======= Warnings saved to /opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment6/warnings.log

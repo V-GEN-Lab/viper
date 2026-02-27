@@ -1,7 +1,0 @@
-"bwa": "/home/viper/.local/share/mamba/envs/VIPERGenomeAssembler/bin/spades-bwa"
-"dataset": "/opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment7/input_dataset.yaml"
-"log_filename": "log.properties"
-"max_nthreads": !!int "10"
-"output_dir": "/opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment7/mismatch_corrector/scaffolds"
-"strategy": "mapped_squared"
-"work_dir": "/opt/viper/src/Test_samples/testFLU/FLU__FLU_1_TEST_SAMPLE_S0__testFLU/SPAdes_segment7/tmp/corrector_a0wi25vr"
