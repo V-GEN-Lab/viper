@@ -16,12 +16,6 @@ fi
 
 cd "$REPO"
 
-# Verifica se ha alteracoes locais antes de continuar
-if ! git diff --quiet || ! git diff --cached --quiet; then
-  echo "Ha mudancas locais. Faca commit/stash antes de atualizar."
-  exit 1
-fi
-
 echo "Buscando atualizacoes em $REPO..."
 git fetch --quiet origin
 
