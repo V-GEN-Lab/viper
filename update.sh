@@ -17,7 +17,12 @@ fi
 cd "$REPO"
 
 echo "Buscando atualizacoes em $REPO..."
-git fetch --quiet origin
+if ! git fetch --quiet origin; then
+  echo "Nao foi possivel acessar o remoto 'origin' (sem internet ou indisponivel)."
+  echo "Mantendo versao local atual e encerrando sem erro."
+  exit 0
+fi
+
 
 UPSTREAM="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || true)"
 if [ -z "$UPSTREAM" ]; then
