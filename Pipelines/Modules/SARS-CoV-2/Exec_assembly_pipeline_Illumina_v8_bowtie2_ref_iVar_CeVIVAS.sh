@@ -16,5 +16,5 @@ cat *.Statistics > All_Statistics__${FOLDER}.tsv
 
 
 # Run nextClade 
-bash $PIPELINE/SARS-CoV-2/nextstrain_files/nextClade_v1.sh All_Statistics__${FOLDER}.tsv All_Fastas__${FOLDER}.fas ${FOLDER} ${THREADS}
+bash $PIPELINE/SARS-CoV-2/nextClade_v1.sh All_Statistics__${FOLDER}.tsv All_Fastas__${FOLDER}.fas ${FOLDER} ${THREADS}
 rm -rf $PIPELINE/SARS-CoV-2/nextstrain_files/nextClade_v1.sh All_Statistics__${FOLDER}.tsv
