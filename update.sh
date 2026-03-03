@@ -16,6 +16,13 @@ fi
 
 cd "$REPO"
 
+# Se houver alteracoes locais, limpa antes de atualizar para garantir fast-forward.
+if [ -n "$(git status --porcelain --ignore-submodules=all)" ]; then
+  echo "Alteracoes locais detectadas; limpando (git reset --hard + git clean -fd)..."
+  git reset --hard HEAD
+  git clean -fd
+fi
+
 echo "Buscando atualizacoes em $REPO..."
 if ! git fetch --quiet origin; then
   echo "Nao foi possivel acessar o remoto 'origin' (sem internet ou indisponivel)."
