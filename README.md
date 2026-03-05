@@ -1,317 +1,242 @@
 # VIPER - Viral Identification Pipeline for Emergency Response
 
-<img src="images/VIPER_ico.png" width="500" style="display: block; margin: 0 auto;"/>
+<img src="images/VIPER_ico.png" width="420" style="display: block; margin: 0 auto;"/>
 
-<br>
+[Leia em português](README-pt.md)
 
-VIPER is a user-friendly software for assembling and identifying viral genomes (currently SARS-CoV-2, Dengue, and Influenza), from Illumina sequencing data generated through genomic surveillance. Developed and used by the [CeVIVAS](https://bv.fapesp.br/en/auxilios/110575/continuous-improvement-of-vaccines-center-for-viral-surveillance-and-serological-assessment-cevivas/) bioinformatics team at the Butantan Institute, the name VIPER reflects not only their affiliation but also the symbolism of the snake: vitality, rebirth, renewal, and the very essence of life itself!
-
-What sets VIPER apart?
-
-* Assign Dengue virus sequences to lineages! VIPER use the data provided in [DyDEVILS (Dynamic Dengue Evolutionary Viral Intra-genotype Lineage System)](https://github.com/alex-ranieri/denvLineages) to determine DENV lineages to assembled sequences. 
-
-* User-friendly GUI: Say goodbye to intimidating command lines! VIPER boasts a intuitive graphical user interface (GUI) that guides you through the entire analysis workflow, making it accessible to users of all experience levels, even those with no prior bioinformatics expertise.
-
-* Powerful and efficient: Don't let large datasets slow you down. VIPER is built for scalability and performance, tackling even the most extensive sequencing data with ease.
-
-* Accurate and precise: Get reliable results you can trust. VIPER leverages cutting-edge algorithms to ensure high-quality viral genome assembly and identification.
-
-* Open-source and customizable: Transparency and flexibility are key. VIPER is an open-source project, allowing you to tailor it to your specific needs and contribute to its ongoing development.
-
-Who can benefit from VIPER?
-
-* Public health researchers: Expedite virus surveillance and outbreak response with rapid and accurate viral genome identification.
-* Bioinformaticians: Streamline your viral genomics workflow with an efficient and user-friendly tool.
-* Students and educators: Gain valuable hands-on experience in viral genomics with an accessible and comprehensive platform.
-
-VIPER is a constantly evolving and improving software. User feedback is essential to its continued development.
-
-We are always looking for ways to improve VIPER and make it more user-friendly, efficient, and accurate. Your feedback helps us to identify areas where we can make improvements.
-
-If you have any suggestions or feedback, please feel free to share them with us. You can do so by submitting an issue on our GitHub repository, or by contacting us directly.
+VIPER is a user-friendly toolkit for assembling and identifying viral genomes (SARS-CoV-2, Dengue, and Influenza) from Illumina sequencing data. Created by the [CeVIVAS](https://cevivas.butantan.gov.br/) bioinformatics team at the Butantan Institute, VIPER combines an intuitive Windows GUI with robust command-line pipelines.
 
 ## Index
 
-* [Install and configuration](#install-and-configuration)
-    * [Windows](#windows)
-    * [Linux](#linux)
-        * [Using the script](#using-the-script)
-        * [Using a .yaml file](#using-a-yaml-file)
-        * [Configuring the pipeline modules](#configuring-the-pipeline-modules)
-* [Usage](#usage)
-    * [GUI](#gui)
-    * [Command line](#command-line)
-* [VIPER pipelines](#viper-pipelines)
-    * [SARS-CoV-2 assembly](#sars-cov-2-assembly)
-    * [Dengue assembly](#dengue-assembly)
-    * [Influenza assembly](#influenza-assembly)
-* [Future implementations](#future-implementations)
-* [Copyright and licence](#copyright-and-licence)
+- [VIPER - Viral Identification Pipeline for Emergency Response](#viper---viral-identification-pipeline-for-emergency-response)
+  - [Index](#index)
+  - [Highlights](#highlights)
+  - [Supported pipelines](#supported-pipelines)
+  - [Installation](#installation)
+    - [Windows (GUI installer)](#windows-gui-installer)
+    - [Linux (CLI, no GUI)](#linux-cli-no-gui)
+  - [Usage](#usage)
+    - [Windows GUI](#windows-gui)
+    - [Linux command line](#linux-command-line)
+  - [Pipeline overviews](#pipeline-overviews)
+  - [Future implementations](#future-implementations)
+  - [Copyright and licence](#copyright-and-licence)
 
-## Install and configuration
+## Highlights
 
-### Windows
-#### 1. Requirements
-VIPER harnesses the power of the Windows Subsystem for Linux (WSL) to deliver its full functionality. Here's what you need to get your Windows system ready for viral genomics action!
+- Multi-virus pipelines with curated references and lineage assignment.
+- Windows GUI for non-technical users; Linux command-line for servers and pipelines.
+- Resource-aware execution: tested in low computational resources setups.
+- Open source and customizable for lab or surveillance workflows.
 
-* Windows 10 version 2004 or later (Build 19041 or later) or Windows 11.
+## Supported pipelines
 
-* Not sure about your version? Simply type `winver` in the Windows search bar and press Enter to check.
-* Using an earlier version? No worries! [Refer to the official Microsoft manual for guidance.](https://learn.microsoft.com/en-us/windows/wsl/install-manual) 
+- SARS-CoV-2 assembly (Illumina)
+- Dengue assembly (Illumina)
+- Influenza assembly (Illumina)
 
-* Approximately 12.8 GB of free disk space.
+## Installation
 
-#### 2. Installing WSL 2
+### Windows (GUI installer)
 
-Instructions to install WSL 2 on Windows can be found in this [link](https://learn.microsoft.com/en-us/windows/wsl/install).
-Briefly:
-1. Open PowerShell or Windows Command Prompt in administrator mode by right-clicking and selecting "Run as administrator".
-2. Enter the `wsl --install` command.
-3. Restart your machine.
+- Download the Windows installer (`.exe`) from the project [Releases](../../releases). The installer bundles the GUI and sets up the WSL-based backend.
+- Requirements: Windows 10 2004+ (build 19041+) or Windows 11, admin permissions, and ~10 GB free disk space. An internet connection is required to download dependencies during setup.
+- Antivirus tools can flag installers; if that happens, whitelist the VIPER installer.
 
-#### 3. Installing VIPER
+**Step-by-step with screenshots**
 
-❗️**Warning**: The antivirus can falsely detect **.exe** files of VIPER as a virus.
+1) Choose optional tasks (desktop shortcut).  
+<img src="images/VIPER_Install_step_1.png" width="640"/>
 
-**Step 1:** Before proceed with the installation setup, download the [Ubuntu 22.04 Linux image](https://cloud-images.ubuntu.com/wsl/jammy/current/ubuntu-jammy-wsl-amd64-wsl.rootfs.tar.gz) (540 MB of file size), which will serve as the kernel to VIPER.
+2) Confirm installation.  
+<img src="images/VIPER_Install_step_2.png" width="640"/>
 
-⚠️ **Caution:** The installation process might result in errors if your user name contains special characters. To avoid that, simply put the VIPER `Windows` folder on your `C:\` drive.
+3) Copying files.  
+<img src="images/VIPER_Install_step_3.png" width="640"/>
 
-**Step 2:** After the download is complete, go to the `Windows` folder and double-click the **InstallVIPER.exe**. A window will pop-up to select the installation folder for VIPER and to select the downloaded Ubuntu tar.gz file.
+4) Core/WSL bootstrap.  
+<img src="images/VIPER_Install_setp_4.png" width="640"/>
 
-<img src="images/Install_VIPER_1.png" width="300" style="display: block; margin: 0 auto;"/>
+5) Allow WSL enablement/restart if prompted.  
+<img src="images/VIPER_Install_step_5.png" width="420"/>
 
-<br>
+6) Windows enabling WSL.  
+<img src="images/VIPER_Install_step_6.png" width="900"/>
 
-**Step 3:** Browse to select the VIPER installation folder.
+7) Bootstrap inside WSL (micromamba + environment).  
+<img src="images/VIPER_Install_step_7.png" width="900"/>
 
-<br>
+8) Packages being installed.  
+<img src="images/VIPER_Install_step_8.png" width="900"/>
 
-<img src="images/Install_VIPER_2.png" width="500" style="display: block; margin: 0 auto;"/>
-<br>
+9) Finalizing links and PATH inside WSL.  
+<img src="images/VIPER_Install_step_9.png" width="900"/>
 
-**Step 4:** Navigate to select the downloaded Ubuntu tar.gz file.
+10) Finish the installer.  
+<img src="images/VIPER_Install_step_10.png" width="640"/>
 
-<br>
-<img src="images/Install_VIPER_3.png" width="500" style="display: block; margin: 0 auto;"/>
+After installation, launch VIPER from the Start menu or run `VIPER.exe` from the installation folder. If you need to uninstall, use Windows Apps & Features and, if requested, run `wsl --unregister VIPER-Core` from an elevated PowerShell.
 
-<br>
+### Linux (CLI, no GUI)
 
-**Step 5:** Click in the Install box. After a while a message will inform that the installation (import) was completed.
+On Linux, VIPER runs via command line only.
 
-<br>
-<img src="images/Install_VIPER_4.png" width="300" style="display: block; margin: 0 auto;"/>
+**Prerequisites**
 
-<br>
+- Bash, git, curl, and `sudo` (for optional symlinks).
+- Micromamba or Conda (micromamba recommended).
+- Python 3.8 (handled by the environment YAML).
 
-**Step 6:** Set the password for VIPER. It will be exhibited the total amount of RAM and Threads (processors) of the computer that VIPER is being installed. Since VIPER runs in WSL, the user will need to configure the maximum amount of RAM (GB) and Threads that VIPER can use. Make sure to leave some RAM to other Windows processes that might run on your machine. Click in Start configuration when ready.
+**1) Get the code**
 
-<img src="images/Install_VIPER_5.png" width="400" style="display: block; margin: 0 auto;"/>
-
-<br>
-The configuration process will depend on the speed of your internet connection and the process can be tracked on the terminal screen. When finished, the terminal will show the VIPER system on WSL:
-
-<br>
-
-<img src="images/Install_VIPER_6.png" width= "500" style="display: block; margin: 0 auto;"/>
-
-<br>
-You can close this window and click Exit on the VIPER configuration window.
-
-If any internet connection error occurs during instalation or the process is interrupted (a power loss, for example), please unintall VIPER using the following process:
-
-1. Open PowerShell as an administrator (use the Windows search bar): Right-click on the app icon and select "Run as administrator."
-2. Enter the following command:
-```
-wsl --unregister VIPER
-```
-This procedure will also serve to fully uninstall VIPER, if needed.
-
-### Linux
-VIPER pipelines require a virtual environment configured using Miniconda and Micromamba. There are two ways to configure the VIPER environment:
-* **Using a script**: This script will download and install Miniconda and Micromamba, and then create the VIPER environment on the user `home` folder.
-* **Using a YAML file**: This method is recommended if you already have Conda or Micromamba installed.
-#### Using the script
-1. Navigate to the `Linux` folder;
-2. Enter the following commands in the terminal:
-```
-chmod +x minicondaInstallVIPER.sh
-./minicondaInstallVIPER.sh
+```bash
+git clone https://github.com/alex-ranieri/viper.git
+cd viper
 ```
 
-Activate the environment using:
-```
-micromamba activate VIPER
+**2) Install micromamba (if you do not already have micromamba/conda)**  
+Example for bash:
+
+```bash
+curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+./bin/micromamba shell init -s bash -p ~/.local/share/micromamba
+source ~/.bashrc
 ```
 
-#### Using a .yaml file
-1. Configure the Conda channels:
+**3) Create the VIPER environment**
+
+The YAML pins all dependencies. It sets the prefix to `~/.local/share/mamba/envs/VIPERGenomeAssembler`.
+
+```bash
+micromamba create -y -f Pipelines/VIPERGenomeAssembler.yaml
+micromamba activate VIPERGenomeAssembler
+# If activation by name fails, activate by path:
+# micromamba activate ~/.local/share/mamba/envs/VIPERGenomeAssembler
 ```
-conda config --add channels conda-forge
-conda config --add channels anaconda
-conda config --add channels bioconda
-conda config --set channel_priority disabled
+
+**4) Make the pipeline scripts available**
+
+Option A (recommended, creates `/usr/local/bin/VIPER_*.sh` wrappers):
+
+```bash
+sudo bash update.d/post-update.sh
 ```
-2. Install Micromamba (if you don't have it):
-```
-conda install -y -c conda-forge micromamba
-```
-3. Navigate to the `Linux` folder;
-4. Install the VIPER environment:
-```
-micromamba create -y -f VIPER.yml
-```
-Activate the environment using:
-```
-micromamba activate VIPER
-```
-#### Configuring the pipeline modules
-1. Copy the `pipelineModules` folder, located under the `Linux` folder, to a directory of your preference;
-2. Navigate to the `pipelineModules` folder;
-3. Run the `configurePATH.sh` script to export the directory to `$PATH` as `$PIPELINE`:
-```
+
+Option B (no sudo): add the modules folder to PATH and expose `$PIPELINE`:
+
+```bash
+cd Pipelines/Modules
 chmod +x configurePATH.sh
 ./configurePATH.sh
+# Reload your shell or source ~/.bashrc to pick up PATH/PIPELINE.
 ```
 
 ## Usage
 
-### GUI
-* Windows
+### Windows GUI
 
-To run VIPER in GUI mode, execute the file **RunVIPER.exe**, located on the `Windows` folder, with a double-click. You can copy it or make a shortcut. 
+Launch `VIPER.exe`. The GUI has a basic and an advanced view:
 
-* ⚠️ If a visualization glitch occurs, please restart your computer.
+<img src="images/VIPER_GUI_basic.png" width="640"/>  
+<img src="images/VIPER_GUI_Advanced.png" width="640"/>
 
-* Linux
+In the Advanced tab, you can change the maximum RAM VIPER may use: enter the value in the required format, click Apply, then use Update to confirm it applied.
 
-1. Copy the `viperGUI` folder, located under the `Linux` folder, to a directory of your preference;
-2. Navigate to the `viperGUI` folder;
-3. Activate the VIPER environment (if not activated):
-```
-micromamba activate VIPER
-```
-4. Run the `viperGUI.py` with python:
-```
-python viperGUI.py
-```
-* Parameters and input
+VIPER refreshes viral databases before running; you can also trigger database updates manually when needed.
 
-Currently, VIPER offers a focused set of parameters and inputs to tailor your analysis:
+Choose how many threads VIPER will use for assembly before starting a run.
 
-1. **Selecting Your FASTQ Reads:**
-* Choose the directory containing your Illumina FASTQ reads (R1 and R2 in **.fastq.gz** format). VIPER will assemble all samples within.
+Run pipeline steps:
 
-* ⚠️ [Ensure your FASTQ files follow the Illumina naming convention used in BaseSpace.](https://support.illumina.com/help/BaseSpace_Sequence_Hub_OLH_009008_2/Source/Informatics/BS/NamingConvention_FASTQ-files-swBS.htm)
-* ⚠️ Make sure to enter the directory while browsing before click 'OK'.
+⚠️ Ensure your FASTQ files follow the Illumina naming convention used in BaseSpace: [Illumina FASTQ naming guide](https://support.illumina.com/help/BaseSpace_Sequence_Hub_OLH_009008_2/Source/Informatics/BS/NamingConvention_FASTQ-files-swBS.htm)
 
-2. **Parallel Power:**
+1) Select the folder containing your `*.fastq.gz` pairs.  
+<img src="images/VIPER_GUI_Run_pipeline_step_1.png" width="720"/>  
 
-* Optimize CPU usage: Indicate the number of samples VIPER should assemble simultaneously.
-* Mind the multiplication: Carefully adjust this parameter in conjunction with the threads per sample (step 4) to manage overall CPU load effectively.
+1.1) Choose the viral pipeline.  
+<img src="images/VIPER_GUI_Run_pipeline_step_1.1.png" width="720"/>
 
-3. **Select the specific viral pipeline best suited for your samples.**
-4. **Allocating Threads:**
+2) After selecting folder and pipeline, review the summary and continue.  
+<img src="images/VIPER_GUI_Run_pipeline_step_2.png" width="720"/>
 
-* Distribute the workload: Specify the number of threads VIPER should dedicate to each sample.
-* Balance performance and resources: Strike a balance between analysis speed and overall CPU usage by adjusting this parameter and the number of parallel samples (step 2).
-Example: If you set VIPER to assemble 3 samples in parallel, each using 2 threads, the total CPU load will be 6 threads.
+3) Pipeline executed successfully; confirmation message displayed.  
+<img src="images/VIPER_GUI_Run_pipeline_step_3.png" width="720"/>
 
-<br>
+4) Choose whether to open a simplified dashboard to view results.  
+<img src="images/VIPER_GUI_Run_pipeline_step_4.png" width="720"/>
 
-<img src="images/RunVIPER.png" width= "700" style="display: block; margin: 0 auto;"/>
+5) Dashboard view; export results to Excel if needed.  
+<img src="images/VIPER_GUI_Run_pipeline_step_5.png" width="720"/>
 
-<br>
+6) Generated outputs in the pipeline folder (.fasta genomes plus per-sample subfolders with additional files).  
+<img src="images/VIPER_GUI_Run_pipeline_step_6.png" width="720"/>
 
+Manual database update (optional):  
+<img src="images/VIPER_GUI_Update_database.png" width="640"/>
 
-<br>
+### Linux command line
 
-<img src="images/RunVIPER2.png" width= "700" style="display: block; margin: 0 auto;"/>
+Activate the environment first:
 
-<br>
-
-Results will be located on the same directory of the analyzed samples.
-
-<br>
-
-<img src="images/RunVIPER3.png" width= "700" style="display: block; margin: 0 auto;"/>
-
-<br>
-
-Test samples for SARS-CoV-2, Dengue and Influenza can be found in `Test_samples` folder.
-
-### Command line
-Currently, VIPER offers a focused set of parameters and inputs to tailor your analysis:
-
-1. **Selecting Your FASTQ Reads:**
-* Enter the directory containing your Illumina FASTQ reads (R1 and R2 in **.fastq.gz** format). VIPER will assemble all samples within.
-
-* ⚠️ [Ensure your FASTQ files follow the Illumina naming convention used in BaseSpace.](https://support.illumina.com/help/BaseSpace_Sequence_Hub_OLH_009008_2/Source/Informatics/BS/NamingConvention_FASTQ-files-swBS.htm)
-
-2. **Run the viral pipeline best suited for your samples:** 
-
-```
-# Activate the environment using:
-micromamba activate VIPER
-
-# For SARS-CoV-2:
-VIPER_CoV.sh {num_threads} {num_samples}
-
-# For Dengue:
-VIPER_DENV.sh {num_threads} {num_samples}
-
-# For Influenza:
-VIPER_Influenza.sh {num_threads} {num_samples}
+```bash
+micromamba activate VIPERGenomeAssembler
 ```
 
-* Balance performance and resources: Strike a balance between analysis speed and overall CPU usage by adjusting this parameter and the number of parallel samples.
-Example: If you set VIPER to assemble 3 samples in parallel (`{num_samples}`), each using 2 threads (`{num_threads}`), the total CPU load will be 6 threads.
+If you ran `update.d/post-update.sh`, use the wrappers:
 
-Results will be located on the same directory of the analyzed samples.
+```bash
+# {threads} = threads per sample, {samples} = parallel samples
+VIPER_CoV.sh {threads} {samples}       # SARS-CoV-2
+VIPER_DENV.sh {threads} {samples}      # Dengue
+VIPER_FLU.sh {threads} {samples}       # Influenza
+```
 
-## VIPER pipelines
+If you used `configurePATH.sh` without sudo, run directly via `$PIPELINE`:
 
-### SARS-CoV-2 assembly
+```bash
+bash "$PIPELINE/SARS-CoV-2/Exec_assembly_pipeline_Illumina_v8_bowtie2_ref_iVar_CeVIVAS.sh" {threads} {samples}
+bash "$PIPELINE/DENV/Exec_assembly_pipeline_Illumina_v5_bwa_mem_ref_iVar.sh" {threads} {samples}
+bash "$PIPELINE/Influenza/Exec_assembly_pipeline_Illumina_v3_Vapor_SPAdes.sh" {threads} {samples}
+```
 
-<img src="images/SARS-CoV-2 iSNVs.png" width="600" style="display: block; margin: 0 auto;"/>
+Results are written next to the input FASTQ directory. Test datasets are available under `Test_samples/`.
 
-### Dengue assembly
+## Pipeline overviews
 
-<img src="images/DENV_ASSEMBLY.png" width="600" style="display: block; margin: 0 auto;"/>
+**SARS-CoV-2 assembly overview**  
+<img src="images/SARS-CoV-2 iSNVs.png" width="700" style="display: block; margin: 20px auto;"/>
 
-### Influenza assembly
+**Dengue assembly overview**  
+<img src="images/DENV_ASSEMBLY.png" width="700" style="display: block; margin: 20px auto;"/>
 
-<img src="images/Influenza assembly pipeline.png" width="600" style="display: block; margin: 0 auto;"/>
-
+**Influenza assembly overview**  
+<img src="images/Influenza assembly pipeline.png" width="700" style="display: block; margin: 20px auto;"/>
 
 ## Future implementations
-Shedding New Skin: VIPER's Future Evolution
 
-VIPER's journey is just beginning, with exciting advancements on the horizon:
-
-- [ ] Unlocking advanced options: Unleash greater flexibility for power users with expanded parameter configurations.
-- [ ] Shedding light on pipelines: Illuminate each viral pipeline's methodology and capabilities with detailed explanations in the README file.
-- [ ] Conquering human monkeypox: Integrate a dedicated module for human monkeypox genome assembly, broadening VIPER's viral repertoire.
-- [ ] Intuitive pipeline selection: Empower VIPER to automatically detect the virus from reads and initiate the appropriate pipeline for seamless analysis.
-- [ ] Deciphering output: Dive into the secrets of VIPER's output files with clear and informative documentation.
-- [ ] Tracking progress: Monitor pipeline execution and troubleshoot potential issues with detailed log files.
-- [x] Aesthetic transformation: Infuse VIPER's GUI with visual appeal and intuitive design, making it a joy to navigate and use: changed TKinter to PyQt5!
-- [ ] Phylogenetic pursuits: Empower users to delve into the evolutionary relationships of viruses with a phylogenetics analysis module.
+- Pipelines for additional viruses (e.g., Chikungunya, RSV).
+- Automatic detection of the virus type being analyzed.
+- Phylogeny module with interactive tree visualization via Auspice.
+- Reworked assembly modules for iSNV detection.
+- Allow users to supply custom reference sequences for assembly.
+- Pipeline optimization for workflow managers (e.g., Snakemake, Nextflow).
 
 ## Copyright and licence
 
-VIPER was created by [CeVIVAS](https://bv.fapesp.br/en/auxilios/110575/continuous-improvement-of-vaccines-center-for-viral-surveillance-and-serological-assessment-cevivas/) bioinformatics team at the Butantan Institute:
-* Alex Ranieri J. Lima 
-* Gabriela Ribeiro
-* Vinicius Carius De Souza
-* Isabela Carvalho Brcko
-* Igor Santana Ribeiro
-* James Siqueira Pereira
-* Vincent Louis Viala
+VIPER was created by the [CeVIVAS](https://cevivas.butantan.gov.br/) bioinformatics team at the Butantan Institute:
 
-Suppervised by:
-* Maria Carolina Quartim Barbosa Elias Sabbaga
-* Sandra Coccuzzo Sampaio 
+- Alex Ranieri J. Lima
+- Gabriela Ribeiro
+- Vinicius Carius De Souza
+- Isabela Carvalho Brcko
+- Igor Santana Ribeiro
+- James Siqueira Pereira
+- Vincent Louis Viala
+
+Supervised by:
+
+- Maria Carolina Quartim Barbosa Elias Sabbaga
+- Sandra Coccuzzo Sampaio
 
 VIPER is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
 
