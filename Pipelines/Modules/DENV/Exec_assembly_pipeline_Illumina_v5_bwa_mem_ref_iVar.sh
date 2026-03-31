@@ -8,13 +8,28 @@ for f in $L; do
   echo "${g%_L00*}"
 done | uniq > Lista.txt
 
+RAW_DATA_PATH="${PWD}/read_path.tsv"
+: > "${RAW_DATA_PATH}"
+shopt -s nullglob
+while IFS= read -r SAMPLE; do
+  [ -z "$SAMPLE" ] && continue
+  sample_files=( "${PWD}"/"${SAMPLE}"*.fastq.gz )
+  if [ ${#sample_files[@]} -gt 0 ]; then
+    sample_path=$(printf '%s;' "${sample_files[@]}")
+    sample_path=${sample_path%;}
+  else
+    sample_path="${PWD}"
+  fi
+  printf "%s\t%s\n" "$SAMPLE" "$sample_path" >> "${RAW_DATA_PATH}"
+done < Lista.txt
+shopt -u nullglob
+
 # Init assemblies in folder
 eval "$(conda shell.bash hook)"
 while IFS= read -r SAMPLE; do
   [ -z "$SAMPLE" ] && continue
   bash "$PIPELINE/DENV/Dengue_assembly_v5.1.sh" "$SAMPLE" "${FOLDER}" "${THREADS}"
 done < Lista.txt
-conda deactivate
 
 # Join all fasta and statistics files
 cat *.fasta > "All_Fastas__${FOLDER}.fas"
@@ -64,3 +79,5 @@ NR==1 {
 ' "$STATS" > "$TMP"
 
 mv -f "$TMP" "$STATS"
+python "$PIPELINE/DENV/write_dengue_CeVIVAS_output5.py" "${STATS}" "${PWD}" "${RAW_DATA_PATH}" "${FOLDER}"
+conda deactivate

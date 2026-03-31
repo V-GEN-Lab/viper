@@ -14,6 +14,35 @@ CONSENSUS_MIN_DEPTH="${VIPER_CONSENSUS_MIN_DEPTH:-1}"
 # Armazena o diretório atual e navega até ele (garantindo que o script rode de onde foi chamado)
 s=$(pwd); cd $s
 
+has_tsv_column() {
+    local tsv_file=$1
+    local column_name=$2
+
+    head -n 1 "$tsv_file" | tr '\t' '\n' | grep -Fxq "$column_name"
+}
+
+write_nextclade_assignments() {
+    local tsv_file=$1
+    local clade_file=$2
+    local subclade_file=$3
+
+    if has_tsv_column "$tsv_file" "legacy-clade"; then
+        csvcut -t -c 'legacy-clade' "$tsv_file" | tail -n+2 > "$clade_file"
+    elif has_tsv_column "$tsv_file" "clade"; then
+        csvcut -t -c 'clade' "$tsv_file" | tail -n+2 > "$clade_file"
+    else
+        echo "nextclade_not_available" > "$clade_file"
+    fi
+
+    if has_tsv_column "$tsv_file" "subclade"; then
+        csvcut -t -c 'subclade' "$tsv_file" | tail -n+2 > "$subclade_file"
+    elif has_tsv_column "$tsv_file" "clade"; then
+        csvcut -t -c 'clade' "$tsv_file" | tail -n+2 > "$subclade_file"
+    else
+        echo "nextclade_not_available" > "$subclade_file"
+    fi
+}
+
 # Cria um diretório para cada amostra, caso não exista.
 mkdir -p ${F};
 
@@ -67,6 +96,7 @@ if [ -s segment_4_result.txt ]; then
 else
     echo "not_detected" > H_genotype.txt
     echo "not_detected" > clade.txt
+    echo "not_detected" > subclade.txt
 fi
 
 if [ -s segment_6_result.txt ]; then
@@ -157,18 +187,19 @@ for i in 1 2 3 4 5 6 7 8; do
             # Se o segmento for 4 (HA), faz análise de clade via nextclade
             if [ $(cat H_genotype.txt) == "H1" ] && [ $i -eq 4 ]; then
                 nextclade run -D $PIPELINE/Influenza/nextclade_files/H1 -j ${THREADS} -t nextclade.tsv segments/segment_${i}_${F}.fasta
-                csvcut -t -c clade nextclade.tsv | tail -n+2 > clade.txt
+                write_nextclade_assignments nextclade.tsv clade.txt subclade.txt
             elif [ $(cat H_genotype.txt) == "H3" ] && [ $i -eq 4 ]; then
                 nextclade run -D $PIPELINE/Influenza/nextclade_files/H3 -j ${THREADS} -t nextclade.tsv segments/segment_${i}_${F}.fasta
-                csvcut -t -c clade nextclade.tsv | tail -n+2 > clade.txt
+                write_nextclade_assignments nextclade.tsv clade.txt subclade.txt
             elif [ $(cat H_genotype.txt) == "Victoria" ] && [ $i -eq 4 ]; then
                 nextclade run -D $PIPELINE/Influenza/nextclade_files/Vic -j ${THREADS} -t nextclade.tsv segments/segment_${i}_${F}.fasta
-                csvcut -t -c clade nextclade.tsv | tail -n+2 > clade.txt
+                write_nextclade_assignments nextclade.tsv clade.txt subclade.txt
             elif [ $(cat H_genotype.txt) == "Yamagata" ] && [ $i -eq 4 ]; then
                 nextclade run -D $PIPELINE/Influenza/nextclade_files/Yam -j ${THREADS} -t nextclade.tsv segments/segment_${i}_${F}.fasta
-                csvcut -t -c clade nextclade.tsv | tail -n+2 > clade.txt
+                write_nextclade_assignments nextclade.tsv clade.txt subclade.txt
             elif [ $i -eq 4 ]; then
                 echo "nextclade_not_available" > clade.txt
+                echo "nextclade_not_available" > subclade.txt
             fi
 
             # Faz um novo remapeamento final (ajuste do remapeamento)
@@ -215,6 +246,7 @@ for i in 1 2 3 4 5 6 7 8; do
             # Se for o segmento 4 e não montou, define clade como não detectado
             if [ $i -eq 4 ]; then
                 echo "not_detected" > clade.txt
+                echo "not_detected" > subclade.txt
             fi
         fi
 
@@ -271,9 +303,9 @@ fi
 
 # Cria um arquivo Genome_basic.Statistics com colunas básicas
 ls Genoma_${F}.fasta > ${F}.GenomeName;
-printf "Genome\tN_Reads\tReads_assembled\tPercent_assembled\tSegments_Assembled\tType\tH_genotype\tN_genotype\tSubtype\tClade\n" > Genome_basic.Statistics
+printf "Genome\tN_Reads\tReads_assembled\tPercent_assembled\tSegments_Assembled\tType\tH_genotype\tN_genotype\tSubtype\tClade\tSubClade\n" > Genome_basic.Statistics
 
-paste -d "\t" ${F}.GenomeName ${F}.ReadCount ${F}.ReadsMappedFinal ${F}.PercentMapped ${F}.SegmentsAssembled A_or_B_genotype.txt H_genotype.txt N_genotype.txt  subtype.txt clade.txt >> Genome_basic.Statistics
+paste -d "\t" ${F}.GenomeName ${F}.ReadCount ${F}.ReadsMappedFinal ${F}.PercentMapped ${F}.SegmentsAssembled A_or_B_genotype.txt H_genotype.txt N_genotype.txt  subtype.txt clade.txt subclade.txt >> Genome_basic.Statistics
 
 # Junta Genome_basic.Statistics com segments.Statistics
 paste -d "\t" Genome_basic.Statistics segments.Statistics > ${F}_complete.Statistics

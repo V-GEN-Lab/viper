@@ -1,8 +1,6 @@
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
  
-import seaborn as sns
-import numpy as np
 import sys
 
 from matplotlib import (pyplot as plt,
@@ -26,13 +24,15 @@ def parse_depth(depth_input, genome_size):
     with open(depth_input) as depth_object:
         for row in depth_object:
             genome_id, position, depth_count = row.split()
- 
+            position_index = int(position) - 1
+
             references.add(genome_id)
  
             if len(references) > 1:
                 raise Exception(' This script only handles one genome - contig.')
- 
-            depth[int(position)] = int(depth_count)
+
+            if 0 <= position_index < genome_size:
+                depth[position_index] = int(depth_count)
  
     return depth
  
@@ -52,19 +52,20 @@ def plot_depth(depth_report, output_name, plot_title, genome_size, normalize=Fal
     data = parse_depth(depth_report, genome_size)
  
     y_label = "Normalized Depth" if normalize else "Depth"
-    data = [xx / max(data) for xx in data] if normalize else data
+    max_depth = max(data) if data else 0
+    if normalize and max_depth > 0:
+        data = [xx / max_depth for xx in data]
  
-    sns.set(color_codes=True)
-    plt.title(plot_title)
-    ax = plt.subplot(111)
+    figure, ax = plt.subplots()
+    ax.set_title(plot_title)
  
-    sns_plot = sns.lineplot(x=range(len(data)), y=data)
-    sns_plot.set(xlabel='Genome Position (bp)', ylabel=y_label)
+    ax.plot(range(len(data)), data, linewidth=1.5)
+    ax.set_xlabel('Genome Position (bp)')
+    ax.set_ylabel(y_label)
  
     if not normalize:
         ax.add_line(lines.Line2D([0, genome_size + 1], [depth_cut_off], color="r"))
  
-    figure = plt.gcf()
     figure.set_size_inches(14, 10)
     plt.savefig(output_name, bbox_inches='tight', dpi=400)
     plt.close()

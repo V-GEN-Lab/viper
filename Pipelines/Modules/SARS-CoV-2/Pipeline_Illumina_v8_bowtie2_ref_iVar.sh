@@ -204,8 +204,8 @@ cp ${F}.Statistics ../;
 # 8. Limpeza e Finalização
 # Remover arquivos temporários
 rm *.gz
-rm  ${F}.Pilon.bam ${F}.Pilon2.bam ${F}.Pilon.sorted.bam ${F}_Wuhan_mapped.sorted.bam ${F}_Wuhan_mapped.bam ${F}_minor_mapped.bam
-rm ${F}_Wuhan_mapped.paired.bam ${F}_Wuhan_mapped.paired.sorted.bam
+rm -f ${F}.Pilon.bam ${F}.Pilon2.bam ${F}.Pilon.sorted.bam ${F}_Wuhan_mapped.sorted.bam ${F}_Wuhan_mapped.bam ${F}_minor_mapped.bam
+rm -f ${F}_Wuhan_mapped.paired.bam ${F}_Wuhan_mapped.paired.sorted.bam
 
 # Voltar ao diretório superior
 cd ..;
