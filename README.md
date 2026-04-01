@@ -108,10 +108,12 @@ source ~/.bashrc
 The YAML pins all dependencies. It sets the prefix to `~/.local/share/mamba/envs/VIPERGenomeAssembler`.
 
 ```bash
-micromamba create -y -f Pipelines/VIPERGenomeAssembler.yaml
+micromamba create -y -f Pipelines/VIPERGenomeAssemblerLinux.yaml
 micromamba activate VIPERGenomeAssembler
-# If activation by name fails, activate by path:
-# micromamba activate ~/.local/share/mamba/envs/VIPERGenomeAssembler
+# If activation by name does not work in your shell session, initialize your shell first:
+# micromamba shell init -s bash -p ~/.local/share/micromamba
+# source ~/.bashrc
+# micromamba activate VIPERGenomeAssembler
 ```
 
 **4) Make the pipeline scripts available**
@@ -125,10 +127,12 @@ sudo bash update.d/post-update.sh
 Option B (no sudo): add the modules folder to PATH and expose `$PIPELINE`:
 
 ```bash
-cd Pipelines/Modules
-chmod +x configurePATH.sh
-./configurePATH.sh
-# Reload your shell or source ~/.bashrc to pick up PATH/PIPELINE.
+export PIPELINE="$(pwd)/Pipelines/Modules"
+echo 'export PIPELINE="$HOME/viper/Pipelines/Modules"' >> ~/.bashrc
+echo 'export PATH="$PIPELINE:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+# If your repository is not in $HOME/viper, replace that path accordingly.
+# configurePATH.sh may not work in every restricted or non-sudo environment, so manually exporting PIPELINE and updating PATH is the safest approach for shared servers.
 ```
 
 ## Usage
