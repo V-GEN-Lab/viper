@@ -90,7 +90,7 @@ No Linux o uso é apenas via terminal.
 **1) Obtenha o código**
 
 ```bash
-git clone https://github.com/alex-ranieri/viper.git
+git clone https://github.com/V-GEN-Lab/viper.git
 cd viper
 ```
 
