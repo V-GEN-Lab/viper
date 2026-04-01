@@ -90,7 +90,7 @@ On Linux, VIPER runs via command line only.
 **1) Get the code**
 
 ```bash
-git clone https://github.com/alex-ranieri/viper.git
+git clone https://github.com/V-GEN-Lab/viper.git
 cd viper
 ```
 
