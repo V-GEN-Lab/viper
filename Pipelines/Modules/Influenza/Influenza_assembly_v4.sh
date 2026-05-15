@@ -10,6 +10,7 @@ THREADS=${3:-10}
 
 TRIM_QUAL="${VIPER_PHRED:-20}"            # qualidade mínima na janela deslizante
 CONSENSUS_MIN_DEPTH="${VIPER_CONSENSUS_MIN_DEPTH:-1}"
+FINAL_CONSENSUS_MIN_DEPTH=10
 
 # Armazena o diretório atual e navega até ele (garantindo que o script rode de onde foi chamado)
 s=$(pwd); cd $s
@@ -177,7 +178,7 @@ for i in 1 2 3 4 5 6 7 8; do
             rm -rf segments/segment_preconsensus_${i}_${F}.bam segments/segment_preconsensus_${i}_${F}.fasta
 
             # Novo consenso (ivar)
-            samtools mpileup -aa -A -d 0 -Q 0 segments/segment_preconsensus_${i}_${F}.sorted.bam | ivar consensus -m ${CONSENSUS_MIN_DEPTH} -p segment_${i}_${F}_ivar -i segment${i}_${F}.fasta
+            samtools mpileup -aa -A -d 0 -Q 0 segments/segment_preconsensus_${i}_${F}.sorted.bam | ivar consensus -m ${FINAL_CONSENSUS_MIN_DEPTH} -p segment_${i}_${F}_ivar -i segment${i}_${F}.fasta
 
             # Substitui bases degeneradas novamente
             python $PIPELINE/Influenza/substitute_degenarate_bases.py segment_${i}_${F}_ivar.fa segments/segment_${i}_${F}.fasta
@@ -210,7 +211,7 @@ for i in 1 2 3 4 5 6 7 8; do
             rm -rf segments/segment_${i}_${F}.bam
 
             # Usa ivar variants para identificar SNPs
-            samtools mpileup -aa -A -d 0 -B -Q 0 segments/segment_${i}_${F}.sorted.bam | ivar variants -p segments/segment_${i}_${F}_iVar_variants -t 0.25 -m $CONSENSUS_MIN_DEPTH -r segments/segment_${i}_${F}.fasta
+            samtools mpileup -aa -A -d 0 -B -Q 0 segments/segment_${i}_${F}.sorted.bam | ivar variants -p segments/segment_${i}_${F}_iVar_variants -t 0.25 -m $FINAL_CONSENSUS_MIN_DEPTH -r segments/segment_${i}_${F}.fasta
 
             # Gera estatísticas de profundidade, etc.
             grep 'TRUE' segments/segment_${i}_${F}_iVar_variants.tsv | grep -vP 'N\t' | grep -vP '\tN' | wc -l > segments/segment_${i}.SNPsCount
