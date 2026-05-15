@@ -9,7 +9,7 @@ F=DENV__${G}__${H}; # Cria nome padronizado para arquivos (ex: DENV__BR-01__2023
 THREADS=${3:-10}
 
 TRIM_QUAL="${VIPER_PHRED:-20}"            # qualidade mínima na janela deslizante
-CONSENSUS_MIN_DEPTH="${VIPER_CONSENSUS_MIN_DEPTH:-5}"
+CONSENSUS_MIN_DEPTH="${VIPER_CONSENSUS_MIN_DEPTH:-10}"
 
 
 # Configuração inicial do diretório
